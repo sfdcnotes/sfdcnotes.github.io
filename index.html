@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion">
+<html class="theme-next pisces use-motion">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -84,20 +84,23 @@
 
 
 
+<meta name="description" content="yet another insignificant Salesforce development notes">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="Salesforce 开发物语">
 <meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="Salesforce 开发物语">
+<meta property="og:description" content="yet another insignificant Salesforce development notes">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="Salesforce 开发物语">
+<meta name="twitter:description" content="yet another insignificant Salesforce development notes">
 
 
 
 <script type="text/javascript" id="hexo.configuration">
   var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: 'Muse',
-    sidebar: {"position":"left","display":"post"},
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -112,10 +115,10 @@
 
   <link rel="canonical" href="http://yoursite.com/"/>
 
-  <title> Hexo </title>
+  <title> Salesforce 开发物语 </title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh_Hans">
 
   
 
@@ -133,7 +136,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
+  <div class="container one-collumn sidebar-position-right 
    page-home 
  ">
     <div class="headband"></div>
@@ -145,7 +148,7 @@
   <div class="custom-logo-site-title">
     <a href="/"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Hexo</span>
+      <span class="site-title">Salesforce 开发物语</span>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
@@ -172,7 +175,17 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
           </a>
         </li>
       
@@ -182,7 +195,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -235,8 +248,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/07/24/hello-world/" itemprop="url">
-                  Hello World
+                <a class="post-title-link" href="/2016/07/24/hello-sfdc/" itemprop="url">
+                  Hello SFDC
                 </a>
               
             
@@ -248,7 +261,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">Posted on</span>
             <time itemprop="dateCreated" datetime="2016-07-24T21:38:27+08:00" content="2016-07-24">
               2016-07-24
             </time>
@@ -337,8 +350,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/07/24/hello-sfdc/" itemprop="url">
-                  Hello SFDC
+                <a class="post-title-link" href="/2016/07/24/hello-world/" itemprop="url">
+                  Hello World
                 </a>
               
             
@@ -350,7 +363,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">Posted on</span>
             <time itemprop="dateCreated" datetime="2016-07-24T21:38:27+08:00" content="2016-07-24">
               2016-07-24
             </time>
@@ -451,16 +464,16 @@
       <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
-               alt="John Doe" />
-          <p class="site-author-name" itemprop="name">John Doe</p>
-          <p class="site-description motion-element" itemprop="description"></p>
+               src="/uploads/sfdcnotes-avatar.jpeg"
+               alt="Jun Ke" />
+          <p class="site-author-name" itemprop="name">Jun Ke</p>
+          <p class="site-description motion-element" itemprop="description">yet another insignificant Salesforce development notes</p>
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
               <span class="site-state-item-count">2</span>
-              <span class="site-state-item-name">Artikel</span>
+              <span class="site-state-item-name">posts</span>
             </a>
           </div>
 
@@ -503,17 +516,17 @@
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">John Doe</span>
+  <span class="author" itemprop="copyrightHolder">Jun Ke</span>
 </div>
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="http://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
   Theme -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
+    NexT.Pisces
   </a>
 </div>
 
@@ -578,6 +591,13 @@
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
 
   
 
