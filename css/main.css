@@ -186,7 +186,7 @@ th {
 body {
   position: relative;
   font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 2;
   color: #555;
   background: #fff;
@@ -203,7 +203,7 @@ body {
 }
 @media (min-width: 1600px) {
   body {
-    font-size: 18px;
+    font-size: 16px;
   }
 }
 h1,
@@ -979,7 +979,7 @@ pre .javascript .function {
 }
 .menu .menu-item a {
   display: block;
-  font-size: 13px;
+  font-size: 16px;
   text-transform: capitalize;
   line-height: inherit;
   border-bottom: 1px solid transparent;
@@ -1017,7 +1017,7 @@ pre .javascript .function {
 .post-body .figure .caption {
   margin: 10px auto 15px;
   text-align: center;
-  font-size: 16px;
+  font-size: 14px;
   color: #999;
   font-weight: bold;
   line-height: 1;
@@ -1506,7 +1506,7 @@ pre .javascript .function {
   font-size: 16px;
 }
 .site-state-item-name {
-  font-size: 13px;
+  font-size: 16px;
   color: #999;
 }
 .feed-link {
@@ -1549,7 +1549,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff117c;
+  background: #ff057a;
 }
 .links-of-blogroll {
   font-size: 13px;
