@@ -1,0 +1,614 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="收购," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="从2006年第一笔收购开始，Salesforce 迄今为止已完成了 38 笔收购交易，收购金额达到了约49亿美元。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Salesforce 是怎么买买买的？">
+<meta property="og:url" content="https://sfdcnotes.github.io/2016/01/24/salesforce-acquisitions/index.html">
+<meta property="og:site_name" content="Salesforce 开发物语">
+<meta property="og:description" content="从2006年第一笔收购开始，Salesforce 迄今为止已完成了 38 笔收购交易，收购金额达到了约49亿美元。">
+<meta property="og:image" content="https://sfdcnotes.github.io/uploads/images/salesforce-acquisitions.png">
+<meta property="og:updated_time" content="2016-08-06T16:07:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Salesforce 是怎么买买买的？">
+<meta name="twitter:description" content="从2006年第一笔收购开始，Salesforce 迄今为止已完成了 38 笔收购交易，收购金额达到了约49亿美元。">
+<meta name="twitter:image" content="https://sfdcnotes.github.io/uploads/images/salesforce-acquisitions.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '柯俊'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://sfdcnotes.github.io/2016/01/24/salesforce-acquisitions/"/>
+
+  <title> Salesforce 是怎么买买买的？ | Salesforce 开发物语 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Salesforce 开发物语</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Salesforce, Development, and more</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Salesforce 是怎么买买买的？
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-01-24T00:00:00+08:00" content="2016-01-24">
+              2016-01-24
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>从2006年第一笔收购开始，Salesforce 迄今为止已完成了 38 笔收购交易，收购金额达到了约49亿美元。</p>
+<p><img src="/uploads/images/salesforce-acquisitions.png" alt="Salesforce Acquisitions"></p>
+<a id="more"></a>
+<h3 id="Sendia"><a href="#Sendia" class="headerlink" title="Sendia"></a>Sendia</h3><p>2006年4月以1500万美元收购了 Sendia。<br>Sendia 为企业提供移动解决方案，是最早在 AppExchange 上发布应用的开发商之一。这是 Salesforce 的第一笔收购，收购后 Salesforce 推出了移动端企业服务，包括支持移动端的 AppExchange，支持当时流行的黑莓设备的 Salesforce Classic。</p>
+<h3 id="Kieden"><a href="#Kieden" class="headerlink" title="Kieden"></a>Kieden</h3><p>2006年8月收购了 Kieden，收购金额没有公布。<br>Kieden 是一家只有4个人的公司，做 Google AdWords 和 Salesforce 的集成方案，发布在 AppExchange 上。Salesforce 在收购后基于 Kieden 的技术推出 Salesforce for Google AdWords。</p>
+<h3 id="Kenlet"><a href="#Kenlet" class="headerlink" title="Kenlet"></a>Kenlet</h3><p>2007年1月收购了 Kenlet，收购金额没有公布。<br>Kenlet 是一个类似 Digg 的新闻服务，用户选择自己喜欢的话题，关注相关的新闻，Kenlet 的技术被用在 Salesforce 的 IdeaExchange 和 Dell 的 IdeaStorm 中。收购后 Salesforce 推出了 Salesforce Ideas，帮助客户构建自己的 Idea 社区。</p>
+<h3 id="Koral"><a href="#Koral" class="headerlink" title="Koral"></a>Koral</h3><p>2007年3月收购了 Koral，收购金额没有公布。<br>Koral 是一家文档协作的公司，Salesforce 收购后推出了 Apex Content 和 Content Exchange，现在看到的 Salesforce Documents。</p>
+<h3 id="InStranet"><a href="#InStranet" class="headerlink" title="InStranet"></a>InStranet</h3><p>2008年8月以3150万美元收购了 InStranet。<br>InStranet 是一家为客服提供知识管理的公司。Salesforce 收购后推出了 Salesforce Knowledge。后来推出的 Service Cloud 也要归功于 InStranet 的团队和技术。</p>
+<h3 id="GroupSwim"><a href="#GroupSwim" class="headerlink" title="GroupSwim"></a>GroupSwim</h3><p>2009年12月收购了 GroupSwim，收购金额没有公布。<br>GroupSwim 是一个公司内部团队协作工具，Salesforce 收购后整合成 Chatter，这是 Salesforce 为走向社交化而进行收购的开端。</p>
+<h3 id="Informavores"><a href="#Informavores" class="headerlink" title="Informavores"></a>Informavores</h3><p>2009年12月收购了 Informavores，收购金额没有公布。<br>Informavores 通过可视化的业务流程界面简化了 Call Center 和客户之间的互动，保障了流程规范。Salesforce 收购后推出了 Visual Process Manager，现在叫做 Visual Workflow。</p>
+<h3 id="Jigsaw"><a href="#Jigsaw" class="headerlink" title="Jigsaw"></a>Jigsaw</h3><p>2010年4月以1.42亿美元收购 Jigsaw。<br>Jigsaw 这个单词意思为拼图，这家公司做的事情就是让企业员工上传同事等的个人联系信息，同时获得一点积分，积分可以用来下载这个联系人数据库里的所有资料。这个简单的众筹模式让 Jigsaw 成为了世界上信息最完整，数据最准确，更新最及时的企业联系人数据库。Salesforce 收购后把 Jigsaw 更名为 Data.com，帮助客户及时更新他们的联系人。</p>
+<h3 id="Sitemasher"><a href="#Sitemasher" class="headerlink" title="Sitemasher"></a>Sitemasher</h3><p>2010年5月收购了 Sitemasher，收购金额没有公布。<br>Sitemasher 是一个快速建站工具，他们的口号是 No programming, no kidding。Sitemasher 帮助开发者，企业服务提供商以低成本，快速开发出数据驱动的网站，比如酒店预订，汽车租赁等等。Salesforce 收购后推出了 Site.com。</p>
+<h3 id="Activa-Live"><a href="#Activa-Live" class="headerlink" title="Activa Live"></a>Activa Live</h3><p>2010年9月收购了 Activa Live，收购金额没有公布。<br>Activa Live 开发了 Activa Live Chat，一个用于售前售后支持的在线聊天工具。Salesforce 收购后集成到 Service Cloud，推出了 Live Agent。</p>
+<h3 id="Salesforce-Japan"><a href="#Salesforce-Japan" class="headerlink" title="Salesforce Japan"></a>Salesforce Japan</h3><p>2010年10月以1500万美元收购了 Salesforce Japan 的剩余股份。<br>Salesforce Japan 由 Salesforce 和 Sunbridge 于 2000年在日本成立。其中 Sunbridge 占 30% 股份，此次收购是因为财务原因。Salesforce 在亚太地区的收益占 14%，较前一年增长了 9%，而其中的大多数是日本市场贡献的。通过对 Salesforce Japan 的收购，保证其从日本云计算市场的增长中获得更多收益。</p>
+<h3 id="Heroku"><a href="#Heroku" class="headerlink" title="Heroku"></a>Heroku</h3><p>2010年12月以2.12亿美元收购 Heroku。<br>Heroku 成立于 2007年，是Y-Combinator 孵化的一家 Ruby 应用程序托管平台。Salesforce 表示收购了 Heroku 将为下一代企业应用开发者（Ruby 和 Java）提供支持。后来 Heroku 支持了更多的语言，以及和 Force.com 平台实现更多的集成。</p>
+<h3 id="Etacts"><a href="#Etacts" class="headerlink" title="Etacts"></a>Etacts</h3><p>2010年12月收购了 Etacts， 收购金额没有公布。<br>Etacts 是一个联系人管理工具，支持 Gmail 联系人，手机联系人，会根据联系的频率，次数，最近联系时间来排序，并发送提醒。Salesforce 收购后就将 Etacts 关闭，此次收购是为了吸收 Etacts 的技术来改进自身的应用程序。</p>
+<h3 id="Dimdim"><a href="#Dimdim" class="headerlink" title="Dimdim"></a>Dimdim</h3><p>2011年1月以3100万美元收购 Dimdim。<br>Dimdim 是一个在线会议工具，Salesforce 表示将集成 Dimdim 和 Chatter，这相当于打造一个企业版的 Facebook。不过现在看仿佛收效不大。</p>
+<h3 id="Manymoon"><a href="#Manymoon" class="headerlink" title="Manymoon"></a>Manymoon</h3><p>2011年2月以大约2500万到3500万美元的价格收购 Manymoon。<br>Manymoon 是一个社交任务管理工具，是在 Google App Marketplace 上很流行的工具。Salesforce 收购后推出了 Do.com，曾与 Desk.com 进行集成。但于2013年10月关闭了 Do.com，并随后卖掉了 Do.com 这个域名。</p>
+<h3 id="Radian6"><a href="#Radian6" class="headerlink" title="Radian6"></a>Radian6</h3><p>2011年3月以3.26亿美元收购 Radian6。<br>Radian6 是一家社交媒体监控公司，曾帮助 Dell，GE，柯达，UPS 监控和分析海量的社交媒体上的互动信息。Salesforce 收购 Radian6 后保持其独立，后来并入 Salesforce Marketing Cloud。</p>
+<h3 id="Navajo-Systems"><a href="#Navajo-Systems" class="headerlink" title="Navajo Systems"></a>Navajo Systems</h3><p>2011年8月收购了 Navajo Systems。<br>Navajo Systems 是一家提供数据加密服务的公司，通过基于 SaaS 或者 本地部署方式的 VPS 来加密用户数据。许多刚接触云端的客户比较担忧自己的数据存放在云端的安全性，Salesforce 通过收购 Navajo Systems 来让更多潜在客户确信其服务的安全性。</p>
+<h3 id="Assistly"><a href="#Assistly" class="headerlink" title="Assistly"></a>Assistly</h3><p>2011年9月以5000万美元收购 Assistly。<br>Assistly 是一家即时客服服务提供商，企业可以在同一个 Web 界面通过包括 Facebook、Twitter、页面聊天、电子邮件、电话等多渠道和客户进行互动。Assistly 的客户主要是快速成长的初创企业，包括 Instagram、Klout、One Kings Lane、Spotify 和 Square。Salesforce 收购了 Assistly 后更名为 Desk.com，不同于 Service Cloud 专注于大企业，Desk.com 主要专注于中小企业的社交化的客服服务。</p>
+<h3 id="ModelMetrics"><a href="#ModelMetrics" class="headerlink" title="ModelMetrics"></a>ModelMetrics</h3><p>2011年11月收购了 ModelMetrics，收购细节没有公布。<br>Model Metrics 是一家提供 Salesforce 项目咨询、实施、培训的公司，帮助 Salesforce 客户走向移动化和社交化。Model Metrics 实施过 1000多个大大小小的 Salesforce 项目。被 Salesforce 收购后，Model Metrics 成为 Salesforce Success Service 的 Strategic Projects 部分，Success Service 是 Salesforce 自己的实施服务部门。</p>
+<h3 id="Rypple"><a href="#Rypple" class="headerlink" title="Rypple"></a>Rypple</h3><p>2011年12月收购了Rypple，收购金额没有公布。<br>Rypple 是一个社交化绩效管理工具平台。不同于传统的绩效管理平台，Rypple 在绩效管理中通过项目跟进、实时反馈等社交化的互动方式，以及积分、奖章等游戏因素增加了管理人员和普通员工之间的互动。Salesforce 收购后将其并入 Salesforce 自己的人力管理应用 Successforce，后来整合成 Work.com。</p>
+<h3 id="Stypi"><a href="#Stypi" class="headerlink" title="Stypi"></a>Stypi</h3><p>2012年5月收购了Stypi，收购金额没有公布。<br>Stypi 是一个可供团队协作的在线编辑器，支持版本控制，共同编辑，语法高亮等功能。尚不清楚 Salesforce 收购后是如何运用到自家的产品中，也可能是用于内部团队。</p>
+<h3 id="Buddy-Media"><a href="#Buddy-Media" class="headerlink" title="Buddy Media"></a>Buddy Media</h3><p>2012年5月以6.89亿美元收购 Buddy Media。<br>Buddy Media 也是一家社交媒体监控公司，它的客户包括福特和惠普。Salesforce 收购后将和 Radian6 一起并入 Salesforce Marketing Cloud。</p>
+<h3 id="ChoicePass"><a href="#ChoicePass" class="headerlink" title="ChoicePass"></a>ChoicePass</h3><p>2012年6月收购了 ChoicePass，收购金额没有公布。<br>ChoicePass 帮助企业员工发现、获取和分享企业赞助的补贴和福利。这是 Salesforce 寄希望于通过收购走向社交化的其中一步，收购后 Salesforce 将其整合到后来推出的 Work.com。</p>
+<h3 id="Thinkfuse"><a href="#Thinkfuse" class="headerlink" title="Thinkfuse"></a>Thinkfuse</h3><p>2012年6月收购了 Thinkfuse，收购金额没有公布。<br>Thinkfuse 是一个 SaaS 应用，帮助企业将项目进度报表定期通过邮件等形式发送给相关人员。收购完成后，Thinkfuse 服务关闭，团队成员加入 Salesforce。</p>
+<h3 id="BlueTail"><a href="#BlueTail" class="headerlink" title="BlueTail"></a>BlueTail</h3><p>2012年7月收购了 BlueTail，收购金额没有公布。<br>BlueTail 是一家以色列的数据挖掘企业。Salesforce 收购后，BlueTail 创始人成为 Data.com 的首席数据科学家，其他成员也加入了 Salesforce。</p>
+<h3 id="GoInstant"><a href="#GoInstant" class="headerlink" title="GoInstant"></a>GoInstant</h3><p>2012年7月以7000万美元收购了 GoInstant。<br>GoInstant 帮助企业构建基于 web 的实时协作应用，它基于 WebRTC 技术实现了不需要额外的软件或者浏览器插件即能进行远程视频会议，相比下，WebEx 等远程会议系统相对臃肿不够灵活。和 Salesforce 之前收购的 Dimdim 一样，GoInstant 会整合进 Chatter，不过目前来看并没有看到在 Chatter 有实现类似功能。</p>
+<h3 id="Prior-Knowledge"><a href="#Prior-Knowledge" class="headerlink" title="Prior Knowledge"></a>Prior Knowledge</h3><p>2012年12月收购了 Prior Knowledge，收购金额没有公布。<br>Prior Knowledge 是一家数据预测分析的公司，通过对大量数据的结构以及表的关系进行深度学习，得出预测结果。Prior Knowledge 对外提供了一套公开的 Veritable 预测数据库 API。Salesforce 收购后将其技术整合入 Salesforce 的分析服务中。</p>
+<h3 id="EntropySoft"><a href="#EntropySoft" class="headerlink" title="EntropySoft"></a>EntropySoft</h3><p>2013年2月收购了 EntropySoft，收购金额没有公布。<br>EntropySoft 是企业软件服务的连接器，它简化了企业应用和云端存储之间的集成。Salesforce 此前曾推出了 Chatterbox 作为 类似 Box 的文件存储服务。收购后，Salesforce 将 EntropySoft 的技术整合进 Chatterbox 并更名为 Salesforce Files，在功能上增加了和 Box，Google Drive 等云端存储服务的集成。</p>
+<h3 id="Clipboard"><a href="#Clipboard" class="headerlink" title="Clipboard"></a>Clipboard</h3><p>2013年5月以1200万美元收购 clipboard.com。<br>Clipboard 是一个类似 Pinterest 的收藏夹服务，用户可以将自己喜欢的网页链接收藏到 Clipboard。截止被收购之前，Clipboard 共有 14万用户收藏了 300 万条网页链接。Salesforce 收购后将其技术整合进 Chatter。</p>
+<h3 id="ExactTarget"><a href="#ExactTarget" class="headerlink" title="ExactTarget"></a>ExactTarget</h3><p>2013年6月以25亿美元收购 ExactTarget。<br>ExactTarget 是一个电子邮件营销平台，一年前收购了 B2B 邮件营销服务 Pardot，Salesforce 的收购是为了弥补自身营销服务的不足。在北美市场，电子邮件营销依然是最具成效的营销方式，不久前市场营销领域的两个领导者，Eloqua 被 Oracle 收购，Marketo 则成功上市。收购 ExactTarget 后，Salesforce 将其和 Radian6、Buddy Media 进行整合，推出 Salesforce Marketing Cloud。</p>
+<h3 id="EdgeSpring"><a href="#EdgeSpring" class="headerlink" title="EdgeSpring"></a>EdgeSpring</h3><p>2013年6月收购了 EdgeSpring，收购金额没有公布。<br>EdgeSpring 是一家商业智能平台公司，提供了可视化数据分析和解决方案，帮助决策者更好作出决策。这是 Salesforce 又一次在数据分析领域的收购。</p>
+<h3 id="RelateIQ"><a href="#RelateIQ" class="headerlink" title="RelateIQ"></a>RelateIQ</h3><p>2014年7月以 3.9 亿美元收购了 RelateIQ。<br>RelateIQ 是一个数据智能化的 CRM 软件，它通过大数据分析邮件内容、讯息、日历、销售数据等，为销售人员提供需要的数据，增强团队协作，更快关单。RelateIQ 支持全平台，销售可以从手机端、或者电脑浏览器、电子邮件进入 RelateIQ。Salesforce 收购后将其更名为 SalesforceIQ。</p>
+<h3 id="Toopher"><a href="#Toopher" class="headerlink" title="Toopher"></a>Toopher</h3><p>2015年4月收购了 Toopher，Toopher 和 Tempo 累计收购金额约 3300 万美元。<br>Toopher 是一家移动安全服务提供商，提供了 OpenID 登录，多重验证登录等服务。Salesforce 收购后将增强用户登录的安全机制。</p>
+<h3 id="Tempo"><a href="#Tempo" class="headerlink" title="Tempo"></a>Tempo</h3><p>2015年5月收购了 Tempo。<br>Tempo 是一个 iOS 日历助理应用，它帮助业务人员管理每日行程，忙于奔波的业务人员打开 Tempo 应用，即可看到当天的行程，点击一个拜访即展现出拜访地点、停车场或者当前附近的 Uber 服务，像一个贴身助理。Tempo 孵化于 SRI International，这也是著名的 Siri 的孵化地。Salesforce 收购后将该技术整合进 SalesforceIQ 应用。</p>
+<h3 id="Kerensen-Consulting"><a href="#Kerensen-Consulting" class="headerlink" title="Kerensen Consulting"></a>Kerensen Consulting</h3><p>2015年7月以 2420 万美元收购了 Kerensen Consulting。<br>Kerensen Consulting 是一家位于巴黎的企业咨询服务提供商，帮助了许多欧洲企业走向云端。此次收购 Salesforce 旨希望在法国市场站稳脚跟，不久前 Salesforce 在巴黎开设了法国的第二个研发中心。</p>
+<h3 id="AKTA"><a href="#AKTA" class="headerlink" title="AKTA"></a>AKTA</h3><p>2015年9月收购了 AKTA， 收购金额没有公布。<br>AKTA 是一家提供移动端用户体验服务的公司，Salesforce 收购后将其保持独立。</p>
+<h3 id="MinHash"><a href="#MinHash" class="headerlink" title="MinHash"></a>MinHash</h3><p>2015年12月收购了 MinHash，收购金额没有公布。<br>MinHash 是一个人工智能平台，类似一个个人助理，它帮助营销人员通过追踪用户行为和兴趣爱好来进行精准营销。Salesforce 收购后将其关闭，MinHash 的四位工程师将加入 Salesforce 的数据分析团队。</p>
+<h3 id="SteelBrick"><a href="#SteelBrick" class="headerlink" title="SteelBrick"></a>SteelBrick</h3><p>2015年12月以 3.6 亿美元收购了 SteelBrick。<br>SteelBrick 是一个报价到收款 (Quote to Cash) 流程自动化应用，它完全构建在 Salesforce 平台上，发布在 AppExchange 上。Salesforce 自身的 Sales Cloud 应用并不提供报价到收款的功能，而是交给 Partner 来做，比如 APPTUS 和 SteelBrick，APPTUS 据信将于 2016年进行 IPO。Salesforce 收购后有可能将 Quote to Cash 功能内置到 Sales Cloud。</p>
+<hr>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
+<li><a href="https://en.wikipedia.org/wiki/Salesforce.com#Acquisitions" target="_blank" rel="external">https://en.wikipedia.org/wiki/Salesforce.com#Acquisitions</a></li>
+<li><a href="https://www.crunchbase.com/organization/salesforce/acquisitions" target="_blank" rel="external">https://www.crunchbase.com/organization/salesforce/acquisitions</a></li>
+<li><a href="http://duckyforce.com/blog/salesforcecoms-history-of-acquisitions-and-in" target="_blank" rel="external">http://duckyforce.com/blog/salesforcecoms-history-of-acquisitions-and-in</a></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/收购/" rel="tag">#收购</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/26/sfdc-dev-sites/" rel="next" title="Salesforce 开发人员常上的几个网站">
+                <i class="fa fa-chevron-left"></i> Salesforce 开发人员常上的几个网站
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/24/hello-world/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/sfdcnotes-avatar.jpeg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sendia"><span class="nav-number">1.</span> <span class="nav-text">Sendia</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kieden"><span class="nav-number">2.</span> <span class="nav-text">Kieden</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kenlet"><span class="nav-number">3.</span> <span class="nav-text">Kenlet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Koral"><span class="nav-number">4.</span> <span class="nav-text">Koral</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#InStranet"><span class="nav-number">5.</span> <span class="nav-text">InStranet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GroupSwim"><span class="nav-number">6.</span> <span class="nav-text">GroupSwim</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Informavores"><span class="nav-number">7.</span> <span class="nav-text">Informavores</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jigsaw"><span class="nav-number">8.</span> <span class="nav-text">Jigsaw</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sitemasher"><span class="nav-number">9.</span> <span class="nav-text">Sitemasher</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Activa-Live"><span class="nav-number">10.</span> <span class="nav-text">Activa Live</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Salesforce-Japan"><span class="nav-number">11.</span> <span class="nav-text">Salesforce Japan</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Heroku"><span class="nav-number">12.</span> <span class="nav-text">Heroku</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Etacts"><span class="nav-number">13.</span> <span class="nav-text">Etacts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dimdim"><span class="nav-number">14.</span> <span class="nav-text">Dimdim</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Manymoon"><span class="nav-number">15.</span> <span class="nav-text">Manymoon</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Radian6"><span class="nav-number">16.</span> <span class="nav-text">Radian6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Navajo-Systems"><span class="nav-number">17.</span> <span class="nav-text">Navajo Systems</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Assistly"><span class="nav-number">18.</span> <span class="nav-text">Assistly</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ModelMetrics"><span class="nav-number">19.</span> <span class="nav-text">ModelMetrics</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rypple"><span class="nav-number">20.</span> <span class="nav-text">Rypple</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stypi"><span class="nav-number">21.</span> <span class="nav-text">Stypi</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Buddy-Media"><span class="nav-number">22.</span> <span class="nav-text">Buddy Media</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ChoicePass"><span class="nav-number">23.</span> <span class="nav-text">ChoicePass</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Thinkfuse"><span class="nav-number">24.</span> <span class="nav-text">Thinkfuse</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BlueTail"><span class="nav-number">25.</span> <span class="nav-text">BlueTail</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GoInstant"><span class="nav-number">26.</span> <span class="nav-text">GoInstant</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Prior-Knowledge"><span class="nav-number">27.</span> <span class="nav-text">Prior Knowledge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EntropySoft"><span class="nav-number">28.</span> <span class="nav-text">EntropySoft</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Clipboard"><span class="nav-number">29.</span> <span class="nav-text">Clipboard</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ExactTarget"><span class="nav-number">30.</span> <span class="nav-text">ExactTarget</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EdgeSpring"><span class="nav-number">31.</span> <span class="nav-text">EdgeSpring</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RelateIQ"><span class="nav-number">32.</span> <span class="nav-text">RelateIQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Toopher"><span class="nav-number">33.</span> <span class="nav-text">Toopher</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tempo"><span class="nav-number">34.</span> <span class="nav-text">Tempo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kerensen-Consulting"><span class="nav-number">35.</span> <span class="nav-text">Kerensen Consulting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AKTA"><span class="nav-number">36.</span> <span class="nav-text">AKTA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MinHash"><span class="nav-number">37.</span> <span class="nav-text">MinHash</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SteelBrick"><span class="nav-number">38.</span> <span class="nav-text">SteelBrick</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">39.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
