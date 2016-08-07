@@ -97,7 +97,7 @@
 
 公众号会选择性继续同步更新。">
 <meta property="og:image" content="https://sfdcnotes.github.io/uploads/images/wechat_qrcode.jpg">
-<meta property="og:updated_time" content="2016-08-07T13:14:21.000Z">
+<meta property="og:updated_time" content="2016-08-07T13:58:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="迁移到新博客">
 <meta name="twitter:description" content="Salesforce 开发物语去年的时候开了一个公众号，记录下 Salesforce 开发中遇到的新东西。不过公众号排版不适合包含代码的笔记，所以新开了这个博客，并把以前的东西也迁移过来。
@@ -290,13 +290,30 @@
 <p><img src="/uploads/images/wechat_qrcode.jpg" alt="公众号二维码"></p>
 <p>公众号会选择性继续同步更新。</p>
 <a id="more"></a>
-<h2 id="这个博客的配置"><a href="#这个博客的配置" class="headerlink" title="这个博客的配置"></a>这个博客的配置</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<h2 id="这个博客的配置"><a href="#这个博客的配置" class="headerlink" title="这个博客的配置"></a>这个博客的配置</h2><h3 id="在-Github-上新建一个特殊的-Repo"><a href="#在-Github-上新建一个特殊的-Repo" class="headerlink" title="在 Github 上新建一个特殊的 Repo"></a>在 Github 上新建一个特殊的 Repo</h3><p>名字为yourname.github.io</p>
+<h3 id="安装好-git-和-npm"><a href="#安装好-git-和-npm" class="headerlink" title="安装好 git 和 npm"></a>安装好 git 和 npm</h3><pre><code>git --vresion
+npm --version
+</code></pre><h3 id="安装-hexo"><a href="#安装-hexo" class="headerlink" title="安装 hexo"></a>安装 hexo</h3><pre><code>npm install hexo -g
+npm install hexo-cli -g
+</code></pre><h3 id="Clone-Github-repo-到本地"><a href="#Clone-Github-repo-到本地" class="headerlink" title="Clone Github repo 到本地"></a>Clone Github repo 到本地</h3><pre><code>cd ~/Somewhere
+git clone https://github.com/yourname/yourname.github.io.git
+</code></pre><h3 id="初始化本地的-Hexo-博客"><a href="#初始化本地的-Hexo-博客" class="headerlink" title="初始化本地的 Hexo 博客"></a>初始化本地的 Hexo 博客</h3><pre><code>hexo init yourname.github.io
+cd yourname.github.io
+npm install hexo-deployer-git --save
+hexo generate
+hexo server
+</code></pre><h3 id="部署到-Github"><a href="#部署到-Github" class="headerlink" title="部署到 Github"></a>部署到 Github</h3><ol>
+<li>修改 _config.yml 文件<br> deploy:<br>   type: git<br>   repo: <a href="https://github.com/yourname/yourname.github.io.git" target="_blank" rel="external">https://github.com/yourname/yourname.github.io.git</a></li>
+<li>部署<br> hexo deploy</li>
+</ol>
+<h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
 <h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
 <h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<h3 id="遇到的一些问题"><a href="#遇到的一些问题" class="headerlink" title="遇到的一些问题"></a>遇到的一些问题</h3><p>用户对文件夹的权限问题</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
 
       
@@ -442,7 +459,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Salesforce-开发物语"><span class="nav-number">1.</span> <span class="nav-text">Salesforce 开发物语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#这个博客的配置"><span class="nav-number">2.</span> <span class="nav-text">这个博客的配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">2.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">2.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">2.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">2.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Salesforce-开发物语"><span class="nav-number">1.</span> <span class="nav-text">Salesforce 开发物语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#这个博客的配置"><span class="nav-number">2.</span> <span class="nav-text">这个博客的配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在-Github-上新建一个特殊的-Repo"><span class="nav-number">2.1.</span> <span class="nav-text">在 Github 上新建一个特殊的 Repo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装好-git-和-npm"><span class="nav-number">2.2.</span> <span class="nav-text">安装好 git 和 npm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-hexo"><span class="nav-number">2.3.</span> <span class="nav-text">安装 hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Clone-Github-repo-到本地"><span class="nav-number">2.4.</span> <span class="nav-text">Clone Github repo 到本地</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化本地的-Hexo-博客"><span class="nav-number">2.5.</span> <span class="nav-text">初始化本地的 Hexo 博客</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部署到-Github"><span class="nav-number">2.6.</span> <span class="nav-text">部署到 Github</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">2.7.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">2.8.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">2.9.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#遇到的一些问题"><span class="nav-number">2.10.</span> <span class="nav-text">遇到的一些问题</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
