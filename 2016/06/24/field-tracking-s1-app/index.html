@@ -1,0 +1,640 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="3H04XzJVTQ" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Salesforce1,Mobile," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="场景为巡店员去门店，打开手机上的 Salesforce1，查找附近的门店，进入门店页面，录入巡店记录，上传照片。
+这个应用尽量简化，主要涉及 S1 配置，S1 中的 Visualforce/JavaScript，地图 API 调用。
+文末附有未托管的安装包链接。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用 Salesforce1 创建一个巡店应用">
+<meta property="og:url" content="https://sfdcnotes.github.io/2016/06/24/field-tracking-s1-app/index.html">
+<meta property="og:site_name" content="Salesforce 开发物语">
+<meta property="og:description" content="场景为巡店员去门店，打开手机上的 Salesforce1，查找附近的门店，进入门店页面，录入巡店记录，上传照片。
+这个应用尽量简化，主要涉及 S1 配置，S1 中的 Visualforce/JavaScript，地图 API 调用。
+文末附有未托管的安装包链接。">
+<meta property="og:image" content="https://sfdcnotes.github.io/uploads/images/s1-datamodel.png">
+<meta property="og:image" content="https://sfdcnotes.github.io/uploads/images/chrome-device.png">
+<meta property="og:image" content="https://sfdcnotes.github.io/uploads/images/s1-1.png">
+<meta property="og:image" content="https://sfdcnotes.github.io/uploads/images/s1-2.png">
+<meta property="og:image" content="https://sfdcnotes.github.io/uploads/images/s1-3.png">
+<meta property="og:image" content="https://sfdcnotes.github.io/uploads/images/s1-4.png">
+<meta property="og:image" content="https://sfdcnotes.github.io/uploads/images/s1-5.jpeg">
+<meta property="og:image" content="https://sfdcnotes.github.io/uploads/images/s1-6.png">
+<meta property="og:image" content="https://sfdcnotes.github.io/uploads/images/s1-7.png">
+<meta property="og:image" content="https://sfdcnotes.github.io/uploads/images/s1-8.png">
+<meta property="og:image" content="https://sfdcnotes.github.io/uploads/images/s1-9.jpeg">
+<meta property="og:image" content="https://sfdcnotes.github.io/uploads/images/s1-10.jpeg">
+<meta property="og:updated_time" content="2016-08-09T13:19:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用 Salesforce1 创建一个巡店应用">
+<meta name="twitter:description" content="场景为巡店员去门店，打开手机上的 Salesforce1，查找附近的门店，进入门店页面，录入巡店记录，上传照片。
+这个应用尽量简化，主要涉及 S1 配置，S1 中的 Visualforce/JavaScript，地图 API 调用。
+文末附有未托管的安装包链接。">
+<meta name="twitter:image" content="https://sfdcnotes.github.io/uploads/images/s1-datamodel.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '柯俊'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://sfdcnotes.github.io/2016/06/24/field-tracking-s1-app/"/>
+
+  <title> 用 Salesforce1 创建一个巡店应用 | Salesforce 开发物语 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Salesforce 开发物语</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Salesforce, Development, and more</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                用 Salesforce1 创建一个巡店应用
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-24T00:00:00+08:00" content="2016-06-24">
+              2016-06-24
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>场景为巡店员去门店，打开手机上的 Salesforce1，查找附近的门店，进入门店页面，录入巡店记录，上传照片。</p>
+<p>这个应用尽量简化，主要涉及 S1 配置，S1 中的 Visualforce/JavaScript，地图 API 调用。</p>
+<p>文末附有未托管的安装包链接。</p>
+<a id="more"></a>
+<h3 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h3><p><img src="/uploads/images/s1-datamodel.png" alt="s1-datamodel"></p>
+<p>其中，门店上的地理位置坐标字段根据地址获取，巡店信息均为打分，存为 Picklist  字段。</p>
+<h3 id="录入巡店记录"><a href="#录入巡店记录" class="headerlink" title="录入巡店记录"></a>录入巡店记录</h3><p>准备工作</p>
+<blockquote>
+<p>Salesforce1 应用安装：<br>应用商店：App Store/Google Play<br>直接下载 apk 文件：<a href="https://salesforce1android.herokuapp.com" target="_blank" rel="external">https://salesforce1android.herokuapp.com</a></p>
+<p>Salesforce1 也可以从浏览器中访问：<br>Url 是 <a href="https://[instance].salesforce.com/one/one.app，不过浏览器需要先设置为移动设备模式，否则会进入" target="_blank" rel="external">https://[instance].salesforce.com/one/one.app，不过浏览器需要先设置为移动设备模式，否则会进入</a> Lightning Experience 界面。<br>我试过 Chrome，右键审查元素，点击手机图标，然后刷新页面即可。<br><img src="/uploads/images/chrome-device.png" alt="chrome-device"></p>
+</blockquote>
+<p>打开 Salesforce1 后，找到门店对象，进入门店记录，新建巡店的操作会放置在记录下方的 Action Bar。<br><img src="/uploads/images/s1-1.png" alt="s1-1"></p>
+<p>在门店对象上新建巡店操作 (Action)<br><img src="/uploads/images/s1-2.png" alt="s1-2"></p>
+<p>编辑新建巡店记录的操作布局<br><img src="/uploads/images/s1-3.png" alt="s1-3"></p>
+<p>为门店对象开启Chatter 摘要追踪，用于上传照片用（Chatter Post）<br><img src="/uploads/images/s1-4.png" alt="s1-4"></p>
+<p>Action Bar 上的操作在对象的页面布局中进行控制，为了使用便捷，只保留新建巡店和张贴（Post）<br><img src="/uploads/images/s1-5.jpeg" alt="s1-5"></p>
+<p>再打开门店页面，Action Bar 已经更新<br><img src="/uploads/images/s1-6.png" alt="s1-6"></p>
+<p>点击新建巡店<br><img src="/uploads/images/s1-7.png" alt="s1-7"></p>
+<p>点击张贴，可以拍照上传，上传后将出现在记录的 Chatter Feed 上<br><img src="/uploads/images/s1-8.png" alt="s1-8"></p>
+<p>上面就是录入巡店记录的流程</p>
+<h3 id="门店地理位置信息的获取"><a href="#门店地理位置信息的获取" class="headerlink" title="门店地理位置信息的获取"></a>门店地理位置信息的获取</h3><p>准备知识</p>
+<blockquote>
+<p>有许多第三方的地图 JS API 支持在 web 中嵌入地图，Visualforce 的 apex:map 一系列组件封装了 Google Maps 的 Map, Marker, InfoWindow 等基本功能，具体可以参考文档：<br><a href="https://developer.salesforce.com/docs/atlas.en-us.pages.meta/pages/pages_maps.htm。" target="_blank" rel="external">https://developer.salesforce.com/docs/atlas.en-us.pages.meta/pages/pages_maps.htm。</a></p>
+<p>这个应用使用百度地图作为示例。下面是相关地址，<br>百度 LBS 云开放平台：lbsyun.baidu.com<br>Geocoding API: <a href="http://lbsyun.baidu.com/index.php?title=webapi/guide/webservice-geocoding" target="_blank" rel="external">http://lbsyun.baidu.com/index.php?title=webapi/guide/webservice-geocoding</a><br>JavaScript API: <a href="http://lbsyun.baidu.com/index.php?title=jspopular" target="_blank" rel="external">http://lbsyun.baidu.com/index.php?title=jspopular</a><br>API 控制台：<a href="http://lbsyun.baidu.com/apiconsole/key" target="_blank" rel="external">http://lbsyun.baidu.com/apiconsole/key</a></p>
+<p>进入 API 控制台，创建两个应用，获得 Key，每个 key都有一定的调用次数限制。<br>一个服务端的 Key：用于在 Salesforce server 调用 Geocoding API 转换地址和坐标<br>一个浏览器端的 Key: 用于在 Visualforce 页面中调用 JavaScript API 展示地图</p>
+</blockquote>
+<p>门店地理位置信息将在门店记录创建时通过 trigger 调用百度 Geocoding API 将地址转换为坐标，赋值给坐标字段。</p>
+<p>BaiduMapService 类，封装百度地图 Geocoding API，这里写死了 server key<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">public class BaiduMapService&#123;</div><div class="line"></div><div class="line">    private static String serverKey = &apos;0C0097d9b8309097db38f686a3f8b1c8&apos;;</div><div class="line"></div><div class="line">    public static Geocode getGeocode(String address)&#123;</div><div class="line">        Http h = new Http();</div><div class="line">        HttpRequest req = new HttpRequest();</div><div class="line">        req.setMethod(&apos;GET&apos;);</div><div class="line"></div><div class="line">        String endpoint = &apos;http://api.map.baidu.com/geocoder/v2/?address=&apos; + address + &apos;&amp;output=json&amp;ak=&apos; + serverKey;</div><div class="line"></div><div class="line">        req.setEndpoint(endpoint);</div><div class="line"></div><div class="line">        HttpResponse res = h.send(req);</div><div class="line">        GeocodeResponse geoResponse = (GeocodeResponse)JSON.deserialize(res.getBody(), GeocodeResponse.class);</div><div class="line">        return geoResponse.result.location;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public class GeocodeResponse&#123;</div><div class="line">        public Integer status;</div><div class="line">        public GeocodeResult result;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public class GeocodeResult&#123;</div><div class="line">        public String level;</div><div class="line">        public Integer confidence;</div><div class="line">        public Integer precise;</div><div class="line">        public Geocode location;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public class Geocode&#123;</div><div class="line">        public Decimal lat;</div><div class="line">        public Decimal lng;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Store trigger，after insert/update<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">trigger Store on Store__c (after insert, after update) &#123;  </div><div class="line">    if(!System.isFuture())&#123;</div><div class="line">        StoreGeocodeTriggerHandler.convertGeocode(trigger.newMap.keySet());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>StoreGeocodeTriggerHandler 类<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">public class StoreGeocodeTriggerHandler&#123;  </div><div class="line">    @future(callout=true)</div><div class="line">    public static void convertGeocode(Set&lt;Id&gt; storeIds)&#123;</div><div class="line"></div><div class="line">        List&lt;Store__c&gt; newStores = [Select Id, Address__c, Location__Longitude__s, Location__Latitude__s From Store__c Where Id IN: storeIds];</div><div class="line">        for(Store__c s : newStores)&#123;</div><div class="line">            if(String.isEmpty(s.Address__c))&#123;</div><div class="line">                continue;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            BaiduMapService.Geocode geo = BaiduMapService.getGeocode(s.Address__c);</div><div class="line">            s.Location__Longitude__s = geo.lng;</div><div class="line">            s.Location__Latitude__s = geo.lat;</div><div class="line">        &#125;</div><div class="line">        update newStores;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="在-Salesforce1-中展示附近的门店"><a href="#在-Salesforce1-中展示附近的门店" class="headerlink" title="在 Salesforce1 中展示附近的门店"></a>在 Salesforce1 中展示附近的门店</h3><p>准备知识</p>
+<blockquote>
+<p>Visualforce 通过 https 加载，百度地图 js 库默认是 http，加载时会因为浏览器安全设定而出现”不安全的脚本”错误。好在百度地图终于支持了 https加载，具体参考这篇文档：<br><a href="http://lbsyun.baidu.com/index.php?title=jspopular/guide/introduction#Https_.E8.AF.B4.E6.98.8E" target="_blank" rel="external">http://lbsyun.baidu.com/index.php?title=jspopular/guide/introduction#Https_.E8.AF.B4.E6.98.8E</a></p>
+<p>这个应用中使用了最基本的 Marker, Inforwindow 功能，更多的百度地图 JS API 功能可以参考文档中的类参考和示例DEMO：<br><a href="http://lbsyun.baidu.com/index.php?title=jspopular" target="_blank" rel="external">http://lbsyun.baidu.com/index.php?title=jspopular</a></p>
+<p>Salesforce1 中的 Visualforce 为了更好得和 Salesforce1 中的标准页面进行交互，Salesforce 提供了 sforce.one 这个对象，参考文档：<br><a href="https://developer.salesforce.com/docs/atlas.en-us.salesforce1.meta/salesforce1/salesforce1_dev_jsapi_sforce_one.htm" target="_blank" rel="external">https://developer.salesforce.com/docs/atlas.en-us.salesforce1.meta/salesforce1/salesforce1_dev_jsapi_sforce_one.htm</a></p>
+</blockquote>
+<p>加载附近门店页面时，手机获取当前地理位置坐标，通过 JavaScript Remoting 根据当前坐标获取附近一定范围内的门店，将门店加载在地图上。</p>
+<p>NearbyStoresController 类，获取门店信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public class NearbyStoresController&#123;  </div><div class="line">    @RemoteAction</div><div class="line">    public static List&lt;Store__c&gt; findNearbyStores(Geocode geo)&#123;</div><div class="line">        return [Select Id, Address__c, Name, Phone__c, Location__Longitude__s, Location__Latitude__s From Store__c Where DISTANCE(Location__c, GEOLOCATION(:geo.lat, :geo.lng),&apos;km&apos;) &lt; 10];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public class Geocode&#123;</div><div class="line">        public Decimal lat&#123;get;set;&#125;</div><div class="line">        public Decimal lng&#123;get;set;&#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>NearbyStores page, 写死了 browser key<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div></pre></td><td class="code"><pre><div class="line">&lt;apex:page controller=&quot;NearbyStoresController&quot; applyHtmlTag=&quot;false&quot; applyBodyTag=&quot;false&quot; standardStylesheets=&quot;false&quot; showHeader=&quot;false&quot;&gt;  </div><div class="line">&lt;html&gt;  </div><div class="line">&lt;head&gt;  </div><div class="line">    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;</div><div class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1.0, user-scalable=no&quot; /&gt;</div><div class="line">    &lt;style type=&quot;text/css&quot;&gt;</div><div class="line">    body, html,#allmap &#123;width: 100%;height: 100%;overflow: hidden;margin:0;font-family:&quot;微软雅黑&quot;;&#125;</div><div class="line">    &lt;/style&gt;</div><div class="line">    &lt;script type=&quot;text/javascript&quot; src=&quot;https://api.map.baidu.com/api?v=2.0&amp;ak=XZp5y53XTiF6iPQr3va0kHin&amp;s=1&quot;&gt;&lt;/script&gt;</div><div class="line">    &lt;title&gt;附近门店&lt;/title&gt;</div><div class="line">&lt;/head&gt;  </div><div class="line">&lt;body&gt;  </div><div class="line">    &lt;div id=&quot;allmap&quot;&gt;loading...&lt;/div&gt;</div><div class="line">&lt;/body&gt;  </div><div class="line">&lt;/html&gt;  </div><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line"></div><div class="line">    window.onload = function()&#123;</div><div class="line">        // 获取当前地理位置信息</div><div class="line">        navigator.geolocation.getCurrentPosition(success, error);</div><div class="line"></div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    function success(position)&#123;</div><div class="line">        Visualforce.remoting.Manager.invokeAction(</div><div class="line">            &apos;NearbyStoresController.findNearbyStores&apos;,</div><div class="line">            &#123;&apos;lat&apos;:position.coords.latitude,&apos;lng&apos;:position.coords.longitude&#125;,</div><div class="line">            function(result,event)&#123;</div><div class="line">                console.log(event);</div><div class="line">                console.log(result);</div><div class="line">                renderMap(result);</div><div class="line">            &#125;</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    function error(erro)&#123;</div><div class="line">        alert(erro);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    function renderMap(stores)&#123;</div><div class="line">        // 百度地图API功能</div><div class="line">        var map = new BMap.Map(&quot;allmap&quot;);    // 创建Map实例</div><div class="line">        map.addControl(new BMap.MapTypeControl());   //添加地图类型控件</div><div class="line">        map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放</div><div class="line"></div><div class="line">        var data_info = [];</div><div class="line">        for(var i = 0; i&lt;stores.length;i++)&#123;</div><div class="line">            data_info.push([stores[i].Location__Longitude__s,stores[i].Location__Latitude__s,stores[i]]);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        var allPoints = [];</div><div class="line">        for(var i=0;i&lt;data_info.length;i++)&#123;</div><div class="line">            var point = new BMap.Point(data_info[i][0],data_info[i][1]);</div><div class="line">            allPoints.push(point);</div><div class="line">            var marker = new BMap.Marker(point);  // 创建标注</div><div class="line">            var content = data_info[i][2];</div><div class="line">            map.addOverlay(marker);               // 将标注添加到地图中</div><div class="line">            addClickHandler(content,marker);</div><div class="line">        &#125;</div><div class="line">        map.setViewport(allPoints);</div><div class="line"></div><div class="line"></div><div class="line">        var opts = &#123;</div><div class="line">                    width : 0,     // 信息窗口宽度</div><div class="line">                    height: 0,     // 信息窗口高度</div><div class="line">                    title : &quot;&quot; , // 信息窗口标题</div><div class="line">                    enableMessage:true//设置允许信息窗发送短息</div><div class="line">                   &#125;;</div><div class="line"></div><div class="line">        function addClickHandler(store,mark)&#123;</div><div class="line">            mark.addEventListener(&quot;click&quot;,function(e)&#123;</div><div class="line">                openInfo(store,e)&#125;</div><div class="line">            );</div><div class="line">        &#125;</div><div class="line">        function openInfo(store,e)&#123;</div><div class="line">            var p = e.target;</div><div class="line">            var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);</div><div class="line"></div><div class="line">            opts.title = &apos;&lt;a href=&quot;javascript:sforce.one.navigateToSObject(\&apos;&apos; + store.Id + &apos;\&apos;)&quot;&gt;&apos; + store.Name + &apos;&lt;/a&gt;&apos;;</div><div class="line">            var iwContent = &apos;&lt;p&gt;地址：&apos; + store.Address__c + &apos;&lt;/p&gt;&lt;p&gt;电话：&lt;a href=&quot;tel:&apos; + store.Phone__c + &apos;&quot;&gt;&apos; + store.Phone__c + &apos;&lt;/a&gt;&lt;/p&gt;&apos;</div><div class="line"></div><div class="line"></div><div class="line">            var infoWindow = new BMap.InfoWindow(iwContent,opts);  // 创建信息窗口对象</div><div class="line">            map.openInfoWindow(infoWindow,point); //开启信息窗口</div><div class="line">        &#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    &#125;</div><div class="line">&lt;/script&gt;  </div><div class="line">&lt;/apex:page&gt;</div></pre></td></tr></table></figure></p>
+<p>页面创建好了后，新建 Visualforce Tab，加到 Salesforce1 Navigation Menu<br><img src="/uploads/images/s1-9.jpeg" alt="s1-9"></p>
+<p>打开 Salesforce1<br><img src="/uploads/images/s1-10.jpeg" alt="s1-10"></p>
+<p>这个应用创建完了。</p>
+<p>安装包地址</p>
+<blockquote>
+<p><a href="https://login.salesforce.com/packaging/installPackage.apexp?p0=04t36000000PU94" target="_blank" rel="external">https://login.salesforce.com/packaging/installPackage.apexp?p0=04t36000000PU94</a></p>
+</blockquote>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
+<li><a href="https://developer.salesforce.com/docs/atlas.en-us.salesforce1.meta/salesforce1/" target="_blank" rel="external">https://developer.salesforce.com/docs/atlas.en-us.salesforce1.meta/salesforce1/</a></li>
+<li><a href="http://www.vchangyi.com/shop/train/" target="_blank" rel="external">http://www.vchangyi.com/shop/train/</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/Using_geolocation" target="_blank" rel="external">https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/Using_geolocation</a></li>
+<li><a href="http://lbsyun.baidu.com" target="_blank" rel="external">http://lbsyun.baidu.com</a></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Salesforce1/" rel="tag">#Salesforce1</a>
+          
+            <a href="/tags/Mobile/" rel="tag">#Mobile</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/06/apex-parameter-pass/" rel="next" title="Apex 方法参数传递的“传值”和“传引用”">
+                <i class="fa fa-chevron-left"></i> Apex 方法参数传递的“传值”和“传引用”
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/08/lightning-experience/" rel="prev" title="Lightning Experience 快速入门">
+                Lightning Experience 快速入门 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/sfdcnotes-avatar.jpeg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据模型"><span class="nav-number">1.</span> <span class="nav-text">数据模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#录入巡店记录"><span class="nav-number">2.</span> <span class="nav-text">录入巡店记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#门店地理位置信息的获取"><span class="nav-number">3.</span> <span class="nav-text">门店地理位置信息的获取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在-Salesforce1-中展示附近的门店"><span class="nav-number">4.</span> <span class="nav-text">在 Salesforce1 中展示附近的门店</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

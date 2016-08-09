@@ -1,0 +1,603 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="3H04XzJVTQ" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Salesforce" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="最近玩了一下 Zapier，蛮有意思的东西，Zapier 被称为企业版的 IFTTT。Zapier 和 IFTTT 类似，即 A 应用触发了某条规则，就对 B 应用执行某个动作，有点像 Salesforce 的工作流。在 Zapier 中这个流程叫做 Zap，在 IFTTT 中叫做 Recipe。
+可以在 zapier.com 和 ifttt.com 注册玩玩看，上手很快，IFTTT 已经支持 A">
+<meta property="og:type" content="article">
+<meta property="og:title" content="If This Then Salesforce">
+<meta property="og:url" content="https://sfdcnotes.github.io/2016/08/09/if-this-then-salesforce/index.html">
+<meta property="og:site_name" content="Salesforce 开发物语">
+<meta property="og:description" content="最近玩了一下 Zapier，蛮有意思的东西，Zapier 被称为企业版的 IFTTT。Zapier 和 IFTTT 类似，即 A 应用触发了某条规则，就对 B 应用执行某个动作，有点像 Salesforce 的工作流。在 Zapier 中这个流程叫做 Zap，在 IFTTT 中叫做 Recipe。
+可以在 zapier.com 和 ifttt.com 注册玩玩看，上手很快，IFTTT 已经支持 A">
+<meta property="og:image" content="https://sfdcnotes.github.io/uploads/images/ifttt-1.png">
+<meta property="og:image" content="https://sfdcnotes.github.io/uploads/images/ifttt-2.png">
+<meta property="og:image" content="https://sfdcnotes.github.io/uploads/images/ifttt-3.png">
+<meta property="og:image" content="https://sfdcnotes.github.io/uploads/images/ifttt-4.png">
+<meta property="og:image" content="https://sfdcnotes.github.io/uploads/images/ifttt-5.png">
+<meta property="og:image" content="https://sfdcnotes.github.io/uploads/images/zapier-apps.jpeg">
+<meta property="og:image" content="https://sfdcnotes.github.io/uploads/images/zapier-diy.jpeg">
+<meta property="og:image" content="https://sfdcnotes.github.io/uploads/images/zapier-diy2.jpeg">
+<meta property="og:image" content="https://sfdcnotes.github.io/uploads/images/ifttt-1">
+<meta property="og:image" content="https://sfdcnotes.github.io/uploads/images/ifttt-2">
+<meta property="og:image" content="https://sfdcnotes.github.io/uploads/images/ifttt-3">
+<meta property="og:image" content="https://sfdcnotes.github.io/uploads/images/ifttt-4.jpeg">
+<meta property="og:image" content="https://sfdcnotes.github.io/uploads/images/ifttt-diy.jpeg">
+<meta property="og:image" content="https://sfdcnotes.github.io/uploads/images/ifttt-diy-actions.jpeg">
+<meta property="og:updated_time" content="2016-08-09T13:02:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="If This Then Salesforce">
+<meta name="twitter:description" content="最近玩了一下 Zapier，蛮有意思的东西，Zapier 被称为企业版的 IFTTT。Zapier 和 IFTTT 类似，即 A 应用触发了某条规则，就对 B 应用执行某个动作，有点像 Salesforce 的工作流。在 Zapier 中这个流程叫做 Zap，在 IFTTT 中叫做 Recipe。
+可以在 zapier.com 和 ifttt.com 注册玩玩看，上手很快，IFTTT 已经支持 A">
+<meta name="twitter:image" content="https://sfdcnotes.github.io/uploads/images/ifttt-1.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '柯俊'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://sfdcnotes.github.io/2016/08/09/if-this-then-salesforce/"/>
+
+  <title> If This Then Salesforce | Salesforce 开发物语 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Salesforce 开发物语</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Salesforce, Development, and more</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                If This Then Salesforce
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-09T20:54:22+08:00" content="2016-08-09">
+              2016-08-09
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近玩了一下 Zapier，蛮有意思的东西，Zapier 被称为企业版的 IFTTT。Zapier 和 IFTTT 类似，即 A 应用触发了某条规则，就对 B 应用执行某个动作，有点像 Salesforce 的工作流。在 Zapier 中这个流程叫做 Zap，在 IFTTT 中叫做 Recipe。</p>
+<p>可以在 zapier.com 和 ifttt.com 注册玩玩看，上手很快，IFTTT 已经支持 Android 和 iOS 设备。</p>
+<h3 id="Zapier：将-Salesforce-的-Support-Case-同步到-Trello"><a href="#Zapier：将-Salesforce-的-Support-Case-同步到-Trello" class="headerlink" title="Zapier：将 Salesforce 的 Support Case 同步到 Trello"></a>Zapier：将 Salesforce 的 Support Case 同步到 Trello</h3><p>Trello 中管理项目和进度，Salesforce 中处理用户提的 Case。只需以下几步，Salesforce 的 Case 就会同步到 Trello 中的 Card。</p>
+<ol>
+<li><p>选择这个 Zap<br><img src="/uploads/images/ifttt-1.png" alt="zap-1"></p>
+</li>
+<li><p>连接 Salesforce Org<br><img src="/uploads/images/ifttt-2.png" alt="zap-2"></p>
+</li>
+<li><p>连接 Trello 帐号<br><img src="/uploads/images/ifttt-3.png" alt="zap-3"></p>
+</li>
+<li><p>选择 Trello 的 Board 和 Card，Salesforce Case 要显示的字段<br><img src="/uploads/images/ifttt-4.png" alt="zap-4"></p>
+</li>
+<li><p>启用<br><img src="/uploads/images/ifttt-5.png" alt="zap-5"></p>
+</li>
+</ol>
+<h3 id="Zapier：支持的应用"><a href="#Zapier：支持的应用" class="headerlink" title="Zapier：支持的应用"></a>Zapier：支持的应用</h3><p>Zapier 现在支持 500 多个应用，包含市面上大多数叫得出名字的 SaaS 应用<br><img src="/uploads/images/zapier-apps.jpeg" alt="zap-apps"></p>
+<h3 id="Zapier：创建自己的-Zap"><a href="#Zapier：创建自己的-Zap" class="headerlink" title="Zapier：创建自己的 Zap"></a>Zapier：创建自己的 Zap</h3><p>Zapier 上有一些现成的 Zap，我们还可以自己配置任何两个应用之间的 Zap，比如 Email 发到邮箱了，就到 Salesforce 创建一条记录。</p>
+<p>下面是 Zapier 支持的 Salesforce Trigger 和 Action<br><img src="/uploads/images/zapier-diy.jpeg" alt="zap-triggers"><br><img src="/uploads/images/zapier-diy2.jpeg" alt="zap-actions"></p>
+<h3 id="IFTTT：Salesforce-Recipes"><a href="#IFTTT：Salesforce-Recipes" class="headerlink" title="IFTTT：Salesforce Recipes"></a>IFTTT：Salesforce Recipes</h3><p>IFTTT 除了支持常见的 SaaS 应用外，还支持 iOS 和 Android 设备，和设备直接相连，有一些更好玩的 Recipe。可以在手机上安装 IFTTT 的应用，然后浏览看看。</p>
+<p>将 iPhone 的联系人同步到 Salesforce 的 Lead<br><img src="/uploads/images/ifttt-1" alt="ifttt-1"></p>
+<p>测血压设备的数据录入到 Salesforce 系统<br><img src="/uploads/images/ifttt-2" alt="ifttt-2"></p>
+<p>在 iPhone 上添加图片就在 Salesforce log 一个 case<br><img src="/uploads/images/ifttt-3" alt="ifttt-3"></p>
+<p>IFTTT 的 Salesforce Action 有很多 Chatter 相关的<br><img src="/uploads/images/ifttt-4.jpeg" alt="ifttt-4"></p>
+<h3 id="IFTTT：创建自己的-Recipe"><a href="#IFTTT：创建自己的-Recipe" class="headerlink" title="IFTTT：创建自己的 Recipe"></a>IFTTT：创建自己的 Recipe</h3><p>IFTTT 上面有很多用户分享的 Recipe，我们自己也可以创建一些 Recipe，IFTTT 的 Trigger 除了标准的几个外，还支持在 Salesforce 写 Apex Trigger 作为自定义的 Trigger。这个需要先在 Org 中安装一个软件包。<br><img src="/uploads/images/ifttt-diy.jpeg" alt="ifttt-triggers"><br><img src="/uploads/images/ifttt-diy-actions.jpeg" alt="ifttt-actions"></p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
+<li><a href="https://zapier.com/zapbook/salesforce/" target="_blank" rel="external">https://zapier.com/zapbook/salesforce/</a></li>
+<li><a href="https://ifttt.com/salesforce" target="_blank" rel="external">https://ifttt.com/salesforce</a></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/04/migration/" rel="next" title="迁移到新博客">
+                <i class="fa fa-chevron-left"></i> 迁移到新博客
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/sfdcnotes-avatar.jpeg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Zapier：将-Salesforce-的-Support-Case-同步到-Trello"><span class="nav-number">1.</span> <span class="nav-text">Zapier：将 Salesforce 的 Support Case 同步到 Trello</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Zapier：支持的应用"><span class="nav-number">2.</span> <span class="nav-text">Zapier：支持的应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Zapier：创建自己的-Zap"><span class="nav-number">3.</span> <span class="nav-text">Zapier：创建自己的 Zap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IFTTT：Salesforce-Recipes"><span class="nav-number">4.</span> <span class="nav-text">IFTTT：Salesforce Recipes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IFTTT：创建自己的-Recipe"><span class="nav-number">5.</span> <span class="nav-text">IFTTT：创建自己的 Recipe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">6.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

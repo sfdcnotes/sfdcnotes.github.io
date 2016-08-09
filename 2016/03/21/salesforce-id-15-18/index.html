@@ -1,0 +1,608 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="3H04XzJVTQ" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Salesforce,ID," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="ID 是 Salesforce 记录的主键，在 Salesforce 数据库中，ID 以15位存储，所以在 Salesforce 界面、报表等直接从数据库取数时，ID 显示是15位的。
+在 API 中读取数据时 Salesforce 将 ID 从15位转换为18位，所以在Apex、DataLoader、定时导出等外部工具时，ID 显示是18位的。
+结论
+15位和18位在 Salesforce ID">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Salesforce ID中的15位和18位">
+<meta property="og:url" content="https://sfdcnotes.github.io/2016/03/21/salesforce-id-15-18/index.html">
+<meta property="og:site_name" content="Salesforce 开发物语">
+<meta property="og:description" content="ID 是 Salesforce 记录的主键，在 Salesforce 数据库中，ID 以15位存储，所以在 Salesforce 界面、报表等直接从数据库取数时，ID 显示是15位的。
+在 API 中读取数据时 Salesforce 将 ID 从15位转换为18位，所以在Apex、DataLoader、定时导出等外部工具时，ID 显示是18位的。
+结论
+15位和18位在 Salesforce ID">
+<meta property="og:image" content="https://sfdcnotes.github.io/uploads/images/id_calc">
+<meta property="og:updated_time" content="2016-08-09T12:41:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Salesforce ID中的15位和18位">
+<meta name="twitter:description" content="ID 是 Salesforce 记录的主键，在 Salesforce 数据库中，ID 以15位存储，所以在 Salesforce 界面、报表等直接从数据库取数时，ID 显示是15位的。
+在 API 中读取数据时 Salesforce 将 ID 从15位转换为18位，所以在Apex、DataLoader、定时导出等外部工具时，ID 显示是18位的。
+结论
+15位和18位在 Salesforce ID">
+<meta name="twitter:image" content="https://sfdcnotes.github.io/uploads/images/id_calc">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '柯俊'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://sfdcnotes.github.io/2016/03/21/salesforce-id-15-18/"/>
+
+  <title> Salesforce ID中的15位和18位 | Salesforce 开发物语 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Salesforce 开发物语</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Salesforce, Development, and more</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Salesforce ID中的15位和18位
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-21T00:00:00+08:00" content="2016-03-21">
+              2016-03-21
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>ID 是 Salesforce 记录的主键，在 Salesforce 数据库中，ID 以15位存储，所以在 Salesforce 界面、报表等直接从数据库取数时，ID 显示是15位的。</p>
+<p>在 API 中读取数据时 Salesforce 将 ID 从15位转换为18位，所以在Apex、DataLoader、定时导出等外部工具时，ID 显示是18位的。</p>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><blockquote>
+<p>15位和18位在 Salesforce ID 处理中完全等价。<br>不管是15位还是18位 ID，都区分大小写。<br>18位 ID 是 Case Safe 的，换句话说，即便不区分大小写，也不会有两个18位的 ID 出现重复。但如果不区分大小写，两个15位的 ID 有可能出现重复。</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>最早 ID 只有15位的，但用户经常把数据导出到 Excel 等工具中处理。在 Excel 中 VLOOKUP 函数并不区分大小，比如 001A0000006Vm9r 和 001A0000006VM9r 两个记录在 VLOOKUP 只会查找到第一个。Salesforce 认识到了这种潜在的问题，所以推出了18位的 ID。</p>
+<p>Salesforce 在数据库中以及Saleforce内部应用依然使用15位 ID，在对外 API 中在15位 ID 后面加了一个3位的 checksum。这3位的 checksum 需要保证即便不区分大小写的情况下，18位 ID 也不会出现重复。</p>
+<h3 id="18位-ID-的生成逻辑"><a href="#18位-ID-的生成逻辑" class="headerlink" title="18位 ID 的生成逻辑"></a>18位 ID 的生成逻辑</h3><p>下面我们看一下这3位是怎么生成的，</p>
+<p><img src="/uploads/images/id_calc" alt="ID Calculation"></p>
+<ol>
+<li>将15位 ID 分成三段字段，每5位一段</li>
+<li>将三段字符中每一段进行倒序排列</li>
+<li>判断每一位是否是大写字母，如果是的话记为1，不是的话记为0</li>
+<li>对照表中，把每段替换为一个字符</li>
+<li>将三个字符添加到15位 ID 末尾</li>
+</ol>
+<h3 id="管理员转换工具"><a href="#管理员转换工具" class="headerlink" title="管理员转换工具"></a>管理员转换工具</h3><p>因为知道了生成逻辑，也可以自己写一个小工具处理日常遇到的转换问题。这里有一些别人写好的现成工具，</p>
+<blockquote>
+<p>Force.com Utility Belt，一个 Chrome Extension<br><a href="https://chrome.google.com/webstore/detail/forcecom-utility-belt/bchgkjmjnmekbampjoenadmoekocpbhp?hl=en" target="_blank" rel="external">https://chrome.google.com/webstore/detail/forcecom-utility-belt/bchgkjmjnmekbampjoenadmoekocpbhp?hl=en</a></p>
+<p>adminbooster，一个网页版的工具<br><a href="https://www.adminbooster.com/tool/15to18" target="_blank" rel="external">https://www.adminbooster.com/tool/15to18</a></p>
+</blockquote>
+<h3 id="Salesforce-开发中的转换"><a href="#Salesforce-开发中的转换" class="headerlink" title="Salesforce 开发中的转换"></a>Salesforce 开发中的转换</h3><p>Salesforce 的 Formula 中有一个 <code>CASESAFEID()</code> 函数可以把 ID 转换为 18位。<br>在 Apex 中虽然可以将上面的转换实现出来，但是 Apex 内建的 ID 类可以方便的处理这种转换，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">String id15 = &apos;001A0000006Vm9r&apos;;</div><div class="line">ID cid = Id.valueOf(id15);</div><div class="line">String id18 = cid; // &apos;001A0000006Vm9rIAC&apos;</div></pre></td></tr></table></figure>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
+<li><a href="https://help.salesforce.com/apex/HTViewSolution?id=000004383&amp;language=en_US" target="_blank" rel="external">https://help.salesforce.com/apex/HTViewSolution?id=000004383&amp;language=en_US</a></li>
+<li><a href="https://astadiaemea.wordpress.com/2010/06/21/15-or-18-character-ids-in-salesforce-com-%E2%80%93-do-you-know-how-useful-unique-ids-are-to-your-development-effort/" target="_blank" rel="external">https://astadiaemea.wordpress.com/2010/06/21/15-or-18-character-ids-in-salesforce-com-%E2%80%93-do-you-know-how-useful-unique-ids-are-to-your-development-effort/</a></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Salesforce/" rel="tag">#Salesforce</a>
+          
+            <a href="/tags/ID/" rel="tag">#ID</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/20/salesforce-authenticator/" rel="next" title="Salesforce Authenticator">
+                <i class="fa fa-chevron-left"></i> Salesforce Authenticator
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/31/what-is-lightning/" rel="prev" title="Lightning 到底是什么？">
+                Lightning 到底是什么？ <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/sfdcnotes-avatar.jpeg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#结论"><span class="nav-number">1.</span> <span class="nav-text">结论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">2.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18位-ID-的生成逻辑"><span class="nav-number">3.</span> <span class="nav-text">18位 ID 的生成逻辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#管理员转换工具"><span class="nav-number">4.</span> <span class="nav-text">管理员转换工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Salesforce-开发中的转换"><span class="nav-number">5.</span> <span class="nav-text">Salesforce 开发中的转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">6.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

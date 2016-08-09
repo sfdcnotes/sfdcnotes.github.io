@@ -1,0 +1,616 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="3H04XzJVTQ" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Salesforce,指南," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="原文
+An Architects Guide to the Salesforce1 Platformhttps://www.jamesward.com/2014/08/19/an-architects-guide-to-the-salesforce1-platform
+
+Salesforce.com 一开始是一个云端的销售自动化（Sales Force Automation, SFA）以及客户关系">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Salesforce1 平台架构师指南">
+<meta property="og:url" content="https://sfdcnotes.github.io/2016/02/15/salesforce1-platform-guide/index.html">
+<meta property="og:site_name" content="Salesforce 开发物语">
+<meta property="og:description" content="原文
+An Architects Guide to the Salesforce1 Platformhttps://www.jamesward.com/2014/08/19/an-architects-guide-to-the-salesforce1-platform
+
+Salesforce.com 一开始是一个云端的销售自动化（Sales Force Automation, SFA）以及客户关系">
+<meta property="og:updated_time" content="2016-08-09T12:09:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Salesforce1 平台架构师指南">
+<meta name="twitter:description" content="原文
+An Architects Guide to the Salesforce1 Platformhttps://www.jamesward.com/2014/08/19/an-architects-guide-to-the-salesforce1-platform
+
+Salesforce.com 一开始是一个云端的销售自动化（Sales Force Automation, SFA）以及客户关系">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '柯俊'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://sfdcnotes.github.io/2016/02/15/salesforce1-platform-guide/"/>
+
+  <title> Salesforce1 平台架构师指南 | Salesforce 开发物语 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Salesforce 开发物语</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Salesforce, Development, and more</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Salesforce1 平台架构师指南
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-15T00:00:00+08:00" content="2016-02-15">
+              2016-02-15
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="原文"><a href="#原文" class="headerlink" title="原文"></a>原文</h3><blockquote>
+<p>An Architects Guide to the Salesforce1 Platform<br><a href="https://www.jamesward.com/2014/08/19/an-architects-guide-to-the-salesforce1-platform" target="_blank" rel="external">https://www.jamesward.com/2014/08/19/an-architects-guide-to-the-salesforce1-platform</a></p>
+</blockquote>
+<p>Salesforce.com 一开始是一个云端的销售自动化（Sales Force Automation, SFA）以及客户关系管理工具(Customer Relationship Management, CRM)，但经过这么多年的演化，它已经成为一个可以构建任何企业应用的通用平台。Salesforce 这个名字是一个历史遗留产物，Salesforce1 平台虽然仍提供 SFA 和 CRM 的应用，但更是一个构建现代企业系统的基础平台。</p>
+<a id="more"></a>
+<h3 id="价格和功能"><a href="#价格和功能" class="headerlink" title="价格和功能"></a>价格和功能</h3><p>Salesforce1 平台上提供了许多不同版本的产品，像 CRM 应用 Sales Cloud ，客服应用 Service Cloud 以及 Platform 等等。不同的产品在内置功能上会有所不同，在 <a href="http://www.salesforce.com/crm/editions-pricing.jsp" target="_blank" rel="external">http://www.salesforce.com/crm/editions-pricing.jsp</a> 上可查看所有产品和价格表。此外还有专门提供给开发者的免费版本，可在 <a href="https://developer.salesforce.com" target="_blank" rel="external">https://developer.salesforce.com</a> 申请。</p>
+<p>下面我们从不同视角来看 Salesforce1 平台的组成。</p>
+<h3 id="元数据驱动的数据模型-Metadata-driven-Data-Model"><a href="#元数据驱动的数据模型-Metadata-driven-Data-Model" class="headerlink" title="元数据驱动的数据模型 (Metadata-driven Data Model)"></a>元数据驱动的数据模型 (Metadata-driven Data Model)</h3><p>在 Salesforce1 平台的核心是一个云端数据库，通过元数据可以对数据库进行自定义和配置。元数据定义了数据模型，Salesforce 支持两种不同的方式来修改元数据，一种是在 web 界面上点击拖拽等操作来修改，另一种是通过 XML 格式的定义文件来修改。Salesforce1 平台是一个多租户架构的平台，每一个租户（也叫做 Organization 或者 Org）的元数据（也就是数据模型）都支持版本控制、可打包、可测试。</p>
+<h4 id="SObject-数据库中内置的功能"><a href="#SObject-数据库中内置的功能" class="headerlink" title="SObject 数据库中内置的功能"></a>SObject 数据库中内置的功能</h4><blockquote>
+<p>自定义字段 (Custom Field)<br>验证逻辑 (Validation Logic)<br>字段级别的安全性 (Field Level Security)<br>引用关系和选项列表 (Reference and Picklist)<br>Derived Values</p>
+</blockquote>
+<h4 id="SObject-的功能"><a href="#SObject-的功能" class="headerlink" title="SObject 的功能"></a>SObject 的功能</h4><blockquote>
+<p>SOAP 和 REST 的 API<br>基本的增删改查界面<br>通过 Salesforce1 的移动端增删改查界面<br>加索引的搜索</p>
+</blockquote>
+<h4 id="SObject-的字段类型"><a href="#SObject-的字段类型" class="headerlink" title="SObject 的字段类型"></a>SObject 的字段类型</h4><blockquote>
+<p>自动编号 (Auto Number)<br>公式 (Formula)<br>累计汇总 (Rollup Summary)<br>Lookup 关系 (Lookup Reference)<br>Master-Detail 关系 (Master-Detail Reference)<br>复选框 (Checkbox)<br>货币 (Currency)<br>日期和日期时间 (Date and Date/Time)<br>电子邮件 (Email)<br>地理位置 (Geolocation)<br>数字和百分比 (Number and Percent)<br>电话 (Phone)<br>选项列表和多选的选项列表 (Picklist)<br>文本框、文本区域、加密的文本 (Text, Text Area, Encrypted Text)<br>URL</p>
+</blockquote>
+<p>平台上每一个新注册的 Org 都内置一些标准SObject，具体依版本不同而定。比如说 Sales Cloud 版的 Org自带了联系人、线索、业务机会。</p>
+<p>Salesforce 数据模型内置了一些安全上的特性，比如数据更改的审计（change auditing），字段级别的安全性。</p>
+<h3 id="编写代码来实现自定义扩展"><a href="#编写代码来实现自定义扩展" class="headerlink" title="编写代码来实现自定义扩展"></a>编写代码来实现自定义扩展</h3><p>在Salesforce1 平台上，用户可以完全依靠 web 界面拖拽点击来构建应用。但有一些用例需要编程来实现自定义，比如自定义的界面、trigger、scheduled jobs。</p>
+<p>Salesforce1 平台支持的编程语言：<br>Visualforce：服务器端模版语言，用来自定义用户界面<br>Apex：用来编写 trigger，visualforce controller，scheduled jobs 等代码逻辑<br>SOQL：用于数据库查询的领域专用语言（Domain Specific Language, DSL）</p>
+<p>Visualforce 使用了类似 JSP 语法用来创建自定义的 HTML 页面，内嵌在 Salesforce 或者 Salesforce1 移动应用中。Visualforce 中的页面使用了传统的服务器端 MVC 架构，其中 Visualforce 是 View，Apex Class 是 Controller，SObjects 是 Model。Visualforce 页面可以使用任何的 JavaScript，包括 JavaScript Remoting 和各种 RESTful 的 web service。</p>
+<p>一个典型的 Visualforce 页面长这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;apex:page&gt;</div><div class="line">    hello, world</div><div class="line">&lt;/apex:page&gt;</div></pre></td></tr></table></figure></p>
+<p>Apex 是一种语法和 Java 类似的，运行在平台上受管的、单独分隔的、安全的运行时中。Salesforce 提供了 Eclipse 插件 Force.com IDE 和基于 Web 的 Developer Console 用来编写 Apex 代码。Apex trigger 绑定在每个 SObject 的事件上，比如 update、delete、create。Batch jobs 和 scheduled jobs 也是用 Apex 编写。</p>
+<p>一个简单的 trigger 长这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">trigger Foo on Contact (after insert) &#123;</div><div class="line">    for (Contact newItem : trigger.new) &#123;</div><div class="line">        System.debug(&apos;Contact Created: &apos; + newItem.Name)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>SOQL 查询可以在 Developer Console 中运行或者在内嵌在 Apex 中，比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Contact contact = [SELECT Id FROM Contact LIMIT 1];</div></pre></td></tr></table></figure></p>
+<p>Apex 包含了一个类似 JPA/Hibernate 的访问数据库的语法，有助于方便地在 Apex 中对 SObject 进行增删改查。</p>
+<p>一个典型的例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Contact c = new Contact(LastName=&apos;Bar&apos;);</div><div class="line">insert c;</div><div class="line">c.FirstName = &apos;Foo&apos;;</div><div class="line">update c;</div><div class="line">delete c;</div></pre></td></tr></table></figure></p>
+<p>Apex 代码支持版本控制、可打包、可测试。Apex Runtime 包含了单元测试，达到 75% 以上覆盖率的代码才能部署到生产环境。这种代码覆盖率的要求有助于保持平台升级的稳定性，因为 Salesforce 通过运行用户编写的测试代码来进行平台升级时的回归测试。</p>
+<p>除了编写 Apex 代码外，许多业务流程和规则可以通过 Workflow 等来创建。像 SObject 的元数据一样，workflows 可以通过 web 界面来点击创建，Workflows 也是一组 XML 格式的定义文件，支持版本控制、可打包。</p>
+<p>Salesforce.com UI，Salesforce1 手机应用，Apex 运行时，Workflow 引擎都是用来构建企业后台应用，面向和企业员工的交互。而在面向客户的界面上和 Salesforce 进行数据交互，Salesforce1 平台提供了 Heroku 服务，让开发者容易地创建、部署、扩展自定义的 web 应用、移动应用、以及Web/RESTful service。Heroku 应用可以使用任何语言编写（Java、Ruby、Node.js，etc），并部署在一个完全受管的 PaaS 平台上，传统上开发者得自己从头搭建一个运行环境和相应的服务。而在 Heroku 上，像负载均衡、失效转移、集中化日志、持续交付、可扩展性这些功能都是开箱即用的。</p>
+<h3 id="集成和-ETL"><a href="#集成和-ETL" class="headerlink" title="集成和 ETL"></a>集成和 ETL</h3><p>Salesforce1 平台提供了许多方式和其他系统进行集成或者数据迁移同步。</p>
+<h4 id="数据集成的主要方法"><a href="#数据集成的主要方法" class="headerlink" title="数据集成的主要方法"></a>数据集成的主要方法</h4><blockquote>
+<p>Heroku Connect: 一个高性能 Salesforce 数据的标准 SQL 接口<br>SOAP APIs: 强数据类型的 web service<br>REST APIs: 支持 JSON 格式的 web service<br>Streaming APIs: 事件驱动的消息 service<br>Data Import &amp; Export: 非常多的工具，向导，以及 web service 提供了对 salesforce 数据的导入导出<br>电子邮件提醒：Apex 和 Workflow 可以用来从 Salesforce 向用户发送邮件提醒<br>移动端提醒：移动端提醒是内嵌入 Salesforce1 手机应用的，支持自定义的提醒<br>OAuth 2.0：Salesforce web service 支持 OAuth 2.0 认证，其他应用可以用 access token 来调用 Salesforce 的 web service<br>SAML: 支持企业应用间的单点登录<br>Mobile SDKs: Salesforce 的 Mobile SDK 支持 Native, Hybrid 和 HTML5 的移动应用开发<br>第三方集成服务提供商：许多平台集成服务提供商像 Informatics，Boomi，Cast Iron，MuleSoft 都有一些开箱即用的解决方案支持和 Salesforce 的集成</p>
+</blockquote>
+<h3 id="平台的生态"><a href="#平台的生态" class="headerlink" title="平台的生态"></a>平台的生态</h3><p>围绕 Salesforce1 平台有许多服务、应用、框架、工具库。其中包括：<br>AppExchange：Salesforce1 平台的应用商店<br>Data.com：全球的联系人目录<br>ExactTarget：Marketing Cloud<br>开源的框架，SDKs，工具库，示例，可见 github @forcedotcom 和 @developerforce</p>
+<h3 id="可信赖的平台"><a href="#可信赖的平台" class="headerlink" title="可信赖的平台"></a>可信赖的平台</h3><p>作为企业数据和应用的基础，Salesforce1 平台必须是值得信赖的（可以参考：<a href="https://trust.salesforce.com）。Salesforce" target="_blank" rel="external">https://trust.salesforce.com）。Salesforce</a> 的许多方面体现了企业系统的可信赖，包括系统正常工作和响应都是公开在网上可查询的，多层的安全机制，隐私和证书服务。</p>
+<h3 id="如何开始？"><a href="#如何开始？" class="headerlink" title="如何开始？"></a>如何开始？</h3><p>准备进入 Salesforce 吗？最好的方式是自己动手做，Salesforce Developer Workshop（<a href="http://ccoenraets.github.io/salesforce-developer-workshop/）" target="_blank" rel="external">http://ccoenraets.github.io/salesforce-developer-workshop/）</a> 提供了一个简单的教程，帮助新手通过使用来理解平台上的组件。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Salesforce/" rel="tag">#Salesforce</a>
+          
+            <a href="/tags/指南/" rel="tag">#指南</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/24/salesforce-acquisitions/" rel="next" title="Salesforce 是怎么买买买的？">
+                <i class="fa fa-chevron-left"></i> Salesforce 是怎么买买买的？
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/09/trailhead/" rel="prev" title="Trailhead 教你学习 Salesforce">
+                Trailhead 教你学习 Salesforce <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/sfdcnotes-avatar.jpeg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#原文"><span class="nav-number">1.</span> <span class="nav-text">原文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#价格和功能"><span class="nav-number">2.</span> <span class="nav-text">价格和功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#元数据驱动的数据模型-Metadata-driven-Data-Model"><span class="nav-number">3.</span> <span class="nav-text">元数据驱动的数据模型 (Metadata-driven Data Model)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SObject-数据库中内置的功能"><span class="nav-number">3.1.</span> <span class="nav-text">SObject 数据库中内置的功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SObject-的功能"><span class="nav-number">3.2.</span> <span class="nav-text">SObject 的功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SObject-的字段类型"><span class="nav-number">3.3.</span> <span class="nav-text">SObject 的字段类型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写代码来实现自定义扩展"><span class="nav-number">4.</span> <span class="nav-text">编写代码来实现自定义扩展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集成和-ETL"><span class="nav-number">5.</span> <span class="nav-text">集成和 ETL</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据集成的主要方法"><span class="nav-number">5.1.</span> <span class="nav-text">数据集成的主要方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#平台的生态"><span class="nav-number">6.</span> <span class="nav-text">平台的生态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可信赖的平台"><span class="nav-number">7.</span> <span class="nav-text">可信赖的平台</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何开始？"><span class="nav-number">8.</span> <span class="nav-text">如何开始？</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

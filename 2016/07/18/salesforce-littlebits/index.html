@@ -1,0 +1,606 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="3H04XzJVTQ" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Salesforce,Integration,LittleBits," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="LittleBitsLittleBits 是一组开源的模块化电子元件，不同的模块用磁铁和探针拼接起来，和剪纸折纸结合后可以做出手工艺电子作品，用来学习娱乐。
+比如，为了实现用声音控制风扇转起来，可以拼接 fan, sound trigger, power, battery + cable 4个模块。其中，battery + cable 提供电源，power 相当于电源适配器提供9伏电压，当 sou">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Salesforce 和 LittleBits 的集成">
+<meta property="og:url" content="https://sfdcnotes.github.io/2016/07/18/salesforce-littlebits/index.html">
+<meta property="og:site_name" content="Salesforce 开发物语">
+<meta property="og:description" content="LittleBitsLittleBits 是一组开源的模块化电子元件，不同的模块用磁铁和探针拼接起来，和剪纸折纸结合后可以做出手工艺电子作品，用来学习娱乐。
+比如，为了实现用声音控制风扇转起来，可以拼接 fan, sound trigger, power, battery + cable 4个模块。其中，battery + cable 提供电源，power 相当于电源适配器提供9伏电压，当 sou">
+<meta property="og:image" content="https://sfdcnotes.github.io/uploads/images/littlebits">
+<meta property="og:updated_time" content="2016-08-09T13:48:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Salesforce 和 LittleBits 的集成">
+<meta name="twitter:description" content="LittleBitsLittleBits 是一组开源的模块化电子元件，不同的模块用磁铁和探针拼接起来，和剪纸折纸结合后可以做出手工艺电子作品，用来学习娱乐。
+比如，为了实现用声音控制风扇转起来，可以拼接 fan, sound trigger, power, battery + cable 4个模块。其中，battery + cable 提供电源，power 相当于电源适配器提供9伏电压，当 sou">
+<meta name="twitter:image" content="https://sfdcnotes.github.io/uploads/images/littlebits">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '柯俊'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://sfdcnotes.github.io/2016/07/18/salesforce-littlebits/"/>
+
+  <title> Salesforce 和 LittleBits 的集成 | Salesforce 开发物语 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Salesforce 开发物语</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Salesforce, Development, and more</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Salesforce 和 LittleBits 的集成
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-18T00:00:00+08:00" content="2016-07-18">
+              2016-07-18
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="LittleBits"><a href="#LittleBits" class="headerlink" title="LittleBits"></a>LittleBits</h3><p>LittleBits 是一组开源的模块化电子元件，不同的模块用磁铁和探针拼接起来，和剪纸折纸结合后可以做出手工艺电子作品，用来学习娱乐。</p>
+<p>比如，为了实现用声音控制风扇转起来，可以拼接 fan, sound trigger, power, battery + cable 4个模块。其中，battery + cable 提供电源，power 相当于电源适配器提供9伏电压，当 sound trigger 探测到声音时，打开 fan 的开关，风扇就转动起来了。</p>
+<a id="more"></a>
+<p><img src="/uploads/images/littlebits" alt="littlebits"></p>
+<p>LittleBits 一共有 60 个模块，分为四类，</p>
+<blockquote>
+<p>Power: 电源<br>Input: 输入，包括 sound trigger, light sensor 等<br>Output: 输出，包括 fan, LED, Servo 等<br>Wire: 扩展和分支，比如连接一个输入和多个输出，信号逻辑转换，cloudBit，Arduino 等</p>
+</blockquote>
+<p>CloudBit 是其中一个可联网的模块，它是一个嵌入式系统，运行 Linux，有 wifi 功能，还有一个 web server，除了物理模块外，CloudBit 还有一个 http api，正是 CloudBit 和 API 让 LittleBits 可以和其他 web service 连接在一起，还可以和 NEST, Philips HUE 等智能家居连接在一起，形成 Internet of Things，其实 IFTTT 就有许多这样的 recipe。</p>
+<p>本文 Salesforce 和 LittleBits 的集成用到 usb power，sound trigger，button，cloudBit, Number 5个模块。</p>
+<h3 id="将-LittleBits-联网"><a href="#将-LittleBits-联网" class="headerlink" title="将 LittleBits 联网"></a>将 LittleBits 联网</h3><p>LittleBits 和其他 web service 之间的交互通过 cloudBit 以及 cloudBit http api。</p>
+<p>第一次使用时，先登录 littlebits Cloud Control 网站根据提示设置，获取 device Id 和 access token。</p>
+<h3 id="从-Salesforce-到-LittleBits"><a href="#从-Salesforce-到-LittleBits" class="headerlink" title="从 Salesforce 到 LittleBits"></a>从 Salesforce 到 LittleBits</h3><p>场景为追踪 Opportunity 状态，在 LittleBits 的 Number 模块显示可能性百分比。</p>
+<p>LittleBits 端，usb power 模块 连接 button 模块 连接 cloudBit 模块 连接 Number 模块。</p>
+<p>从外部系统到 LittleBits 的 API 中，传递两个参数：percent 和 duration_ms，percent 从0到100，duration_ms 表示这个信号持续时长。</p>
+<p>在这里，可以通过 Opportunity trigger，调用 future callout 方法，调用 API。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">String deviceId = &apos;xxx&apos;;</div><div class="line">String accessToken = &apos;xxxxxxx&apos;;</div><div class="line">Integer percent = 30;// for example</div><div class="line"></div><div class="line">Http h = new Http();</div><div class="line">HttpRequest req = new HttpRequest();</div><div class="line">req.setMethod(&apos;POST&apos;);</div><div class="line">req.setEndpoint(&apos;http://api-http.littlebitscloud.cc/v2/devices/&apos; + deviceId + &apos;/output&apos;);</div><div class="line">req.setHeader(&apos;Authorization&apos;,&apos;Bearer &apos; + accessToken);</div><div class="line">req.setHeader(&apos;Accept&apos;,&apos;application/vnd.littlebits.v2+json&apos;);</div><div class="line">req.setHeader(&apos;Content-Type&apos;,&apos;application/json&apos;);</div><div class="line">req.setBody(&apos;&#123;&quot;percent&quot;:&apos; + percent + &apos;,&quot;duration_ms&quot;:-1&#125;&apos;);</div><div class="line"></div><div class="line">HttpResponse res = h.send(req);</div></pre></td></tr></table></figure></p>
+<p>当 Opportunity 状态改变时，Number 模块显示百分比。</p>
+<h3 id="从-LittleBits-到-Salesforce"><a href="#从-LittleBits-到-Salesforce" class="headerlink" title="从 LittleBits 到 Salesforce"></a>从 LittleBits 到 Salesforce</h3><p>外部系统需要提供一个 API 给 LittleBits 调用。在 Salesforce 中，可以用 Apex Rest API 发布在 Force.com Site 上来实现。</p>
+<p>当 LittleBits 探测到较大声音时，在 Salesforce 中创建一条记录。</p>
+<p>LittleBits 端，usb power 模块 连接 sound trigger 模块 连接 cloudBit 模块。</p>
+<p>Salesforce 端，先创建一个 Force.com Site，然后写一个 Apex Rest API 发布在站点上，Rest API 中解析 LittleBits 传递过来的参数，执行逻辑（比如创建一条记录）。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">@RestResource(urlMapping=&apos;/subscriber&apos;)</div><div class="line">global class LittleBitsSubscriber&#123;</div><div class="line">    @HttpPost</div><div class="line">    global static String doPost()&#123;</div><div class="line">        String requestBody = RestContext.request.requestBody.toString();</div><div class="line">        // parse something...</div><div class="line"></div><div class="line">        // actions</div><div class="line"></div><div class="line">        return &apos;Success&apos;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>下面通过 cloudBit http api 来 subscribe 到 LittleBits。之后 LittleBits 触发事件后会将消息 post 到这个 Apex Rest API。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">String deviceId = &apos;xxx&apos;;</div><div class="line">String accessToken = &apos;xxxxxxx&apos;;</div><div class="line">String subscriberUrl = &apos;&apos;;</div><div class="line">String publisherEvents = &apos;[&quot;amplitude:level:active&quot;]&apos;; // 其他的几种 event 可以在 API 文档查看</div><div class="line"></div><div class="line">Http h = new Http();</div><div class="line">HttpRequest req = new HttpRequest();</div><div class="line">req.setMethod(&apos;POST&apos;);</div><div class="line">req.setEndpoint(&apos;http://api-http.littlebitscloud.cc/v2/subscriptions&apos;);</div><div class="line">req.setHeader(&apos;Authorization&apos;,&apos;Bearer &apos; + accessToken);</div><div class="line">req.setHeader(&apos;Accept&apos;,&apos;application/vnd.littlebits.v2+json&apos;);</div><div class="line">req.setHeader(&apos;Content-Type&apos;,&apos;application/json&apos;);</div><div class="line">req.setBody(&apos;&#123;&quot;publisher_id&quot;:&quot;&apos; + deviceId + &apos;&quot;,&quot;subscriber_id&quot;:&quot;&apos; + subscriberUrl + &apos;&quot;,&quot;publisher_event&quot;:&apos; + publisherEvent + &apos;&#125;&apos;);</div><div class="line"></div><div class="line">HttpResponse res = h.send(req);</div></pre></td></tr></table></figure></p>
+<p>当对着 sound trigger 说话时，Salesforce 会创建一条记录。</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
+<li><a href="http://littlebits.cc/projects/cough-logger" target="_blank" rel="external">http://littlebits.cc/projects/cough-logger</a></li>
+<li><a href="http://developers.littlebitscloud.cc/" target="_blank" rel="external">http://developers.littlebitscloud.cc/</a></li>
+<li><a href="https://github.com/afawcett/littlebits-connector" target="_blank" rel="external">https://github.com/afawcett/littlebits-connector</a></li>
+<li><a href="http://littlebits.cc/shop/bits" target="_blank" rel="external">http://littlebits.cc/shop/bits</a></li>
+<li><a href="https://ifttt.com" target="_blank" rel="external">https://ifttt.com</a></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Salesforce/" rel="tag">#Salesforce</a>
+          
+            <a href="/tags/Integration/" rel="tag">#Integration</a>
+          
+            <a href="/tags/LittleBits/" rel="tag">#LittleBits</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/15/ltng-cmpt-stock-quote/" rel="next" title="Lightning Component - 股票报价组件">
+                <i class="fa fa-chevron-left"></i> Lightning Component - 股票报价组件
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/21/ltng-cmpt-map/" rel="prev" title="Lightning Component - 地图组件">
+                Lightning Component - 地图组件 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/sfdcnotes-avatar.jpeg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#LittleBits"><span class="nav-number">1.</span> <span class="nav-text">LittleBits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将-LittleBits-联网"><span class="nav-number">2.</span> <span class="nav-text">将 LittleBits 联网</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从-Salesforce-到-LittleBits"><span class="nav-number">3.</span> <span class="nav-text">从 Salesforce 到 LittleBits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从-LittleBits-到-Salesforce"><span class="nav-number">4.</span> <span class="nav-text">从 LittleBits 到 Salesforce</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

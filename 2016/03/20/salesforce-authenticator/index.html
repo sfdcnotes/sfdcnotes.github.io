@@ -1,0 +1,600 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="3H04XzJVTQ" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Salesforce,双因素认证," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Salesforce Authenticator 是一个双重验证应用程序，有 iOS 和 Android 版，分别可以在 App Store 和 Google Play 下载到。如果用过 Google Authenticator，那会比较熟悉，绑定帐号后每隔30秒生成一个一次性验证码。
+双重验证双重验证即 Two Factor Authentication，简写为 2FA，又名两步验证、多因素验证">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Salesforce Authenticator">
+<meta property="og:url" content="https://sfdcnotes.github.io/2016/03/20/salesforce-authenticator/index.html">
+<meta property="og:site_name" content="Salesforce 开发物语">
+<meta property="og:description" content="Salesforce Authenticator 是一个双重验证应用程序，有 iOS 和 Android 版，分别可以在 App Store 和 Google Play 下载到。如果用过 Google Authenticator，那会比较熟悉，绑定帐号后每隔30秒生成一个一次性验证码。
+双重验证双重验证即 Two Factor Authentication，简写为 2FA，又名两步验证、多因素验证">
+<meta property="og:image" content="https://sfdcnotes.github.io/uploads/images/2fa.png">
+<meta property="og:image" content="https://sfdcnotes.github.io/uploads/images/admin-config.png">
+<meta property="og:image" content="https://sfdcnotes.github.io/uploads/images/admin-config-2.png">
+<meta property="og:image" content="https://sfdcnotes.github.io/uploads/images/admin-config-3.png">
+<meta property="og:updated_time" content="2016-08-09T12:35:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Salesforce Authenticator">
+<meta name="twitter:description" content="Salesforce Authenticator 是一个双重验证应用程序，有 iOS 和 Android 版，分别可以在 App Store 和 Google Play 下载到。如果用过 Google Authenticator，那会比较熟悉，绑定帐号后每隔30秒生成一个一次性验证码。
+双重验证双重验证即 Two Factor Authentication，简写为 2FA，又名两步验证、多因素验证">
+<meta name="twitter:image" content="https://sfdcnotes.github.io/uploads/images/2fa.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '柯俊'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://sfdcnotes.github.io/2016/03/20/salesforce-authenticator/"/>
+
+  <title> Salesforce Authenticator | Salesforce 开发物语 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Salesforce 开发物语</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Salesforce, Development, and more</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Salesforce Authenticator
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-20T00:00:00+08:00" content="2016-03-20">
+              2016-03-20
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Salesforce Authenticator 是一个双重验证应用程序，有 iOS 和 Android 版，分别可以在 App Store 和 Google Play 下载到。如果用过 Google Authenticator，那会比较熟悉，绑定帐号后每隔30秒生成一个一次性验证码。</p>
+<h3 id="双重验证"><a href="#双重验证" class="headerlink" title="双重验证"></a>双重验证</h3><p>双重验证即 Two Factor Authentication，简写为 2FA，又名两步验证、多因素验证，指的是在用户名和密码之外在增加另外的登录凭证，以保证即便密码泄漏，拥有密码的人也无法登录系统。</p>
+<a id="more"></a>
+<p><img src="/uploads/images/2fa.png" alt="2fa.png"></p>
+<p>登录凭证一般是一次性验证码(One Time Password, OTP)，生成的方式有<br>服务器生成，然后通过邮件或者手机短信发送给用户<br>客户端生成，比如企业用的 RSA SecurID，银行 U盾，以及 Salesforce Authenticator，Google Authenticator 等双重验证应用程序。<br>这种验证码采用基于时间的一次性密码生成算法，每次有效期一般为30秒。</p>
+<h3 id="Salesforce-中的双重登录验证"><a href="#Salesforce-中的双重登录验证" class="headerlink" title="Salesforce 中的双重登录验证"></a>Salesforce 中的双重登录验证</h3><p>广义上而言，邮件发送 Security Token 和手机短信发送验证码都是一种双重验证。不过在这里，双重验证特指 Salesforce Authenticator 应用生成一次性验证码这种方式。</p>
+<p>2.0 版的 Salesforce Authenticator 增加了推送功能，与生成一次性验证码不同，当有登录操作时，Salesforce 会向绑定 Salesforce Authenticator 的手机推送一个安全确认，用户点击确认即可登录。</p>
+<p>Salesforce 根据设备来用户登录，如果用户第一次从该设备登录，Salesforce 会按如下优先级（是否可用）来进行双重验证。<br>从 Salesforce Authenticator 中 push 出一个验证窗口（2.0及更新版本），用户点击验证即可登录。<br>从 Salesforce Authenticator 显示一串6位数字验证码，用户在浏览器输入验证码。这个即基于时间的 One Time Passcode，有效期为 30秒。<br>如果有绑定手机，通过手机短信发送一串验证码，用户输入验证码。<br>向用户绑定的电子邮件地址发送验证码，用户输入验证码，有效期 24小时。</p>
+<h3 id="配置-Salesforce-双重验证登录"><a href="#配置-Salesforce-双重验证登录" class="headerlink" title="配置 Salesforce 双重验证登录"></a>配置 Salesforce 双重验证登录</h3><p>Salesforce 有一个 Walkthrough，点击这个链接登录后即可以看到（<a href="https://login.salesforce.com/services/walkthrough?path=%2Fsetup%2FforcecomHomepage.apexp&amp;tour=secure-logins-with-a-unique-code--two-factor-authentication-）。" target="_blank" rel="external">https://login.salesforce.com/services/walkthrough?path=%2Fsetup%2FforcecomHomepage.apexp&amp;tour=secure-logins-with-a-unique-code--two-factor-authentication-）。</a></p>
+<h4 id="管理员配置"><a href="#管理员配置" class="headerlink" title="管理员配置"></a>管理员配置</h4><p>创建一个权限集，用来双重验证，进入 Setup -&gt; Administer -&gt; Manage Users -&gt; Permission Sets -&gt; New<br><img src="/uploads/images/admin-config.png" alt="admin-config.png"></p>
+<p>保存后点击 System Permissions<br><img src="/uploads/images/admin-config-2.png" alt="admin-config-2.png"></p>
+<p>找到 Two Factor Authentication for User Interface Logins，打勾<br><img src="/uploads/images/admin-config-3.png" alt="admin-config-3.png"></p>
+<p>然后给需要开启两步验证的用户加入赋予这个权限集。</p>
+<h4 id="用户配置"><a href="#用户配置" class="headerlink" title="用户配置"></a>用户配置</h4><p>开启两步验证后，用户第一次登录 Salesforce 时，会显示一个二维码。用户打开 Salesforce Authenticator 扫描二维码，点击确认即可绑定。</p>
+<h4 id="解除绑定"><a href="#解除绑定" class="headerlink" title="解除绑定"></a>解除绑定</h4><p>如果手机丢失或者 Salesforce Authenticator 卸载了，管理员可以解除绑定，在用户详细信息页面，点击 App Registration: One-Time Password Generator 旁边的 Disconnect。解绑后，用户再次登录时会提示重新绑定一个双重验证应用。一个 Salesforce 用户帐号只能绑定一个 Salesforce Authenticator。</p>
+<blockquote>
+<p>如果所有管理员都无法登录 org 了，那就得联系 Salesforce Support。目前可以发邮件给 trailhead@salesforce.com 说明在做 trail 的时候绑定了 Authenticator 但是手机丢了，对方会帮忙解绑。</p>
+</blockquote>
+<h3 id="实用性"><a href="#实用性" class="headerlink" title="实用性"></a>实用性</h3><p>Salesforce Authenticator 和手机绑定在一起，因为有手机丢了这种情况而不那么实用，如果手机验证码的话，补办电话卡还可以用。在这方面 Google Authenticator 也有类似的问题，它的解决办法是一开始有一组备用的10个码在 Google 账户里，用户自己保存好 Google 账号，手机丢失时用来临时替代自动生成的验证码。</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
+<li><a href="https://developer.salesforce.com/docs/atlas.en-us.identityImplGuide.meta/identityImplGuide/security_require_two-factor_authentication.htm" target="_blank" rel="external">https://developer.salesforce.com/docs/atlas.en-us.identityImplGuide.meta/identityImplGuide/security_require_two-factor_authentication.htm</a></li>
+<li><a href="https://help.salesforce.com/apex/HTViewHelpDoc?id=security_removing_two_factor_key.htm&amp;language=th" target="_blank" rel="external">https://help.salesforce.com/apex/HTViewHelpDoc?id=security_removing_two_factor_key.htm&amp;language=th</a></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Salesforce/" rel="tag">#Salesforce</a>
+          
+            <a href="/tags/双因素认证/" rel="tag">#双因素认证</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/11/apex-csv/" rel="next" title="在 Apex 代码中生成 csv 文件">
+                <i class="fa fa-chevron-left"></i> 在 Apex 代码中生成 csv 文件
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/21/salesforce-id-15-18/" rel="prev" title="Salesforce ID中的15位和18位">
+                Salesforce ID中的15位和18位 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/sfdcnotes-avatar.jpeg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#双重验证"><span class="nav-number">1.</span> <span class="nav-text">双重验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Salesforce-中的双重登录验证"><span class="nav-number">2.</span> <span class="nav-text">Salesforce 中的双重登录验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置-Salesforce-双重验证登录"><span class="nav-number">3.</span> <span class="nav-text">配置 Salesforce 双重验证登录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#管理员配置"><span class="nav-number">3.1.</span> <span class="nav-text">管理员配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用户配置"><span class="nav-number">3.2.</span> <span class="nav-text">用户配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解除绑定"><span class="nav-number">3.3.</span> <span class="nav-text">解除绑定</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实用性"><span class="nav-number">4.</span> <span class="nav-text">实用性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

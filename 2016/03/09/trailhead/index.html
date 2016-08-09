@@ -1,0 +1,656 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="3H04XzJVTQ" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Salesforce,Trailhead," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Trailhead 是 Salesforce Doc team 推出的一个互动教程，和 Workbook 类似但更具互动性，地址是
+
+https://developer.salesforce.com/trailhead
+
+Trailhead 的名称Trail 是小径，Trailhead 是小径的起点。Salesforce 中 Trail 就是通向 “Salesforce 技能树” 的小径，Trai">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Trailhead 教你学习 Salesforce">
+<meta property="og:url" content="https://sfdcnotes.github.io/2016/03/09/trailhead/index.html">
+<meta property="og:site_name" content="Salesforce 开发物语">
+<meta property="og:description" content="Trailhead 是 Salesforce Doc team 推出的一个互动教程，和 Workbook 类似但更具互动性，地址是
+
+https://developer.salesforce.com/trailhead
+
+Trailhead 的名称Trail 是小径，Trailhead 是小径的起点。Salesforce 中 Trail 就是通向 “Salesforce 技能树” 的小径，Trai">
+<meta property="og:updated_time" content="2016-08-09T12:16:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Trailhead 教你学习 Salesforce">
+<meta name="twitter:description" content="Trailhead 是 Salesforce Doc team 推出的一个互动教程，和 Workbook 类似但更具互动性，地址是
+
+https://developer.salesforce.com/trailhead
+
+Trailhead 的名称Trail 是小径，Trailhead 是小径的起点。Salesforce 中 Trail 就是通向 “Salesforce 技能树” 的小径，Trai">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '柯俊'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://sfdcnotes.github.io/2016/03/09/trailhead/"/>
+
+  <title> Trailhead 教你学习 Salesforce | Salesforce 开发物语 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Salesforce 开发物语</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Salesforce, Development, and more</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Trailhead 教你学习 Salesforce
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-09T00:00:00+08:00" content="2016-03-09">
+              2016-03-09
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Trailhead 是 Salesforce Doc team 推出的一个互动教程，和 Workbook 类似但更具互动性，地址是</p>
+<blockquote>
+<p><a href="https://developer.salesforce.com/trailhead" target="_blank" rel="external">https://developer.salesforce.com/trailhead</a></p>
+</blockquote>
+<h3 id="Trailhead-的名称"><a href="#Trailhead-的名称" class="headerlink" title="Trailhead 的名称"></a>Trailhead 的名称</h3><p>Trail 是小径，Trailhead 是小径的起点。Salesforce 中 Trail 就是通向 “Salesforce 技能树” 的小径，Trailhead 是学习 Salesforce 的起点，在 Trailhead 学习 Salesforce 的人都是 Trailblazer（开拓小径的拓荒者）。</p>
+<h3 id="Trail-Module-Project"><a href="#Trail-Module-Project" class="headerlink" title="Trail, Module, Project"></a>Trail, Module, Project</h3><p>Trailhead 里有许多 Module 和 Project，它们又由一个个 Unit 组成。一些相关的 Module 组成了一个个 Trail，对应着一个个技能，而Project 则相当于 “项目实战”。</p>
+<a id="more"></a>
+<p>每一个 Unit 都由内容和测验组成，看完了内容，然后完成一组测验，测验包括两种：选择题和实际操作题。实际操作题需要登录 Org，在自己的 Org里完成，然后 Trailhead 检测完成情况。</p>
+<p>截止现在为止一共有下面 19个 Trail，包含了 Admin，Developer，Business User 等等</p>
+<h4 id="Admin-Beginner"><a href="#Admin-Beginner" class="headerlink" title="Admin Beginner"></a>Admin Beginner</h4><blockquote>
+<p>Salesforce 配置和自定义</p>
+</blockquote>
+<h4 id="Admin-Intermediate"><a href="#Admin-Intermediate" class="headerlink" title="Admin Intermediate"></a>Admin Intermediate</h4><blockquote>
+<p>通过拖拽工具来构建应用</p>
+</blockquote>
+<h4 id="Admin-Advanced"><a href="#Admin-Advanced" class="headerlink" title="Admin Advanced"></a>Admin Advanced</h4><blockquote>
+<p>包含高级的公式、事件监控、Lightning Connect</p>
+</blockquote>
+<h4 id="Developer-Beginner"><a href="#Developer-Beginner" class="headerlink" title="Developer Beginner"></a>Developer Beginner</h4><blockquote>
+<p>学习简单的 Apex、Visualforce 和数据开发技能</p>
+</blockquote>
+<h4 id="Developer-Intermediate"><a href="#Developer-Intermediate" class="headerlink" title="Developer Intermediate"></a>Developer Intermediate</h4><blockquote>
+<p>学习移动端开发、软件开发管理、外部系统集成等</p>
+</blockquote>
+<h4 id="Develop-with-Mobile-SDK"><a href="#Develop-with-Mobile-SDK" class="headerlink" title="Develop with Mobile SDK"></a>Develop with Mobile SDK</h4><blockquote>
+<p>使用 Mobile SDK 来构建 iOS，Android 应用</p>
+</blockquote>
+<h4 id="Learn-CRM-Essentials"><a href="#Learn-CRM-Essentials" class="headerlink" title="Learn CRM Essentials"></a>Learn CRM Essentials</h4><blockquote>
+<p>理解 Salesforce 和背后的 CRM 理念</p>
+</blockquote>
+<h4 id="Cultivate-Equality-at-Work"><a href="#Cultivate-Equality-at-Work" class="headerlink" title="Cultivate Equality at Work"></a>Cultivate Equality at Work</h4><blockquote>
+<p>这个是输出价值观，不久前新闻说 Salesforce 在企业内倡导男女同工同酬</p>
+</blockquote>
+<h4 id="Manage-Fundraising-for-Nonprofits"><a href="#Manage-Fundraising-for-Nonprofits" class="headerlink" title="Manage Fundraising for Nonprofits"></a>Manage Fundraising for Nonprofits</h4><blockquote>
+<p>专供非营利组织的应用，salesforce.org</p>
+</blockquote>
+<h4 id="Explore-with-Wave-Analytics"><a href="#Explore-with-Wave-Analytics" class="headerlink" title="Explore with Wave Analytics"></a>Explore with Wave Analytics</h4><blockquote>
+<p>Analytics Cloud 应用，在这里可以申请一个包含简单版分析云的开发 Org</p>
+</blockquote>
+<h4 id="Integrate-Microsoft-Email-and-Salesforce"><a href="#Integrate-Microsoft-Email-and-Salesforce" class="headerlink" title="Integrate Microsoft Email and Salesforce"></a>Integrate Microsoft Email and Salesforce</h4><blockquote>
+<p>学习 Microsoft Outlook 和 Salesforce 的集成</p>
+</blockquote>
+<h4 id="Build-Apps-as-an-ISV-Partner"><a href="#Build-Apps-as-an-ISV-Partner" class="headerlink" title="Build Apps as an ISV Partner"></a>Build Apps as an ISV Partner</h4><blockquote>
+<p>ISV Partner Program 的一些工具和方法，原来 ISV Partner 是可以免费申请的</p>
+</blockquote>
+<h4 id="Manage-the-Salesforce-Way"><a href="#Manage-the-Salesforce-Way" class="headerlink" title="Manage the Salesforce Way"></a>Manage the Salesforce Way</h4><blockquote>
+<p>学习 Salesforce Great Manager Model, 成为一个好管理者的策略</p>
+</blockquote>
+<h4 id="Prepare-for-Salesforce-Releases"><a href="#Prepare-for-Salesforce-Releases" class="headerlink" title="Prepare for Salesforce Releases"></a>Prepare for Salesforce Releases</h4><blockquote>
+<p>学习最新的 Salesforce release 功能，做好自己org应用的 release 管理</p>
+</blockquote>
+<h4 id="Navigate-the-Salesforce-Advantage"><a href="#Navigate-the-Salesforce-Advantage" class="headerlink" title="Navigate the Salesforce Advantage"></a>Navigate the Salesforce Advantage</h4><blockquote>
+<p>通过价值、创新技术、生态来了解 Salesforce 相比起竞争者的优势</p>
+</blockquote>
+<h4 id="Sell-Lightning-Fast-with-Salesforce"><a href="#Sell-Lightning-Fast-with-Salesforce" class="headerlink" title="Sell Lightning Fast with Salesforce"></a>Sell Lightning Fast with Salesforce</h4><blockquote>
+<p>如何使用 Salesforce 让销售卖得更快</p>
+</blockquote>
+<h4 id="Getting-Started-with-Lightning-Experience"><a href="#Getting-Started-with-Lightning-Experience" class="headerlink" title="Getting Started with Lightning Experience"></a>Getting Started with Lightning Experience</h4><blockquote>
+<p>开始 Lightning 的旅程</p>
+</blockquote>
+<h4 id="Migrate-to-Lightning-Experience"><a href="#Migrate-to-Lightning-Experience" class="headerlink" title="Migrate to Lightning Experience"></a>Migrate to Lightning Experience</h4><blockquote>
+<p>为 Sales team 启用并迁移到 Lightning Experience</p>
+</blockquote>
+<h4 id="Develop-for-Lightning-Experience"><a href="#Develop-for-Lightning-Experience" class="headerlink" title="Develop for Lightning Experience"></a>Develop for Lightning Experience</h4><blockquote>
+<p>使用 Visualforce，Lightning Component，Design System 开发 Lightning 应用，Lightning 的开发重客户端</p>
+</blockquote>
+<h3 id="Points-和-Badges"><a href="#Points-和-Badges" class="headerlink" title="Points 和 Badges"></a>Points 和 Badges</h3><p>Trailhead 中每完成一个 Unit 都会获得 Points，如果是选择题，第一次就全答对就有 100分，第二次50分，第三次或更多次才全答对得25分。如果是 实际操作题，只要在 Org 里完成并且通过了 Trailhead 的检测就能得 500分。</p>
+<p>另外每完成1个 Module 或者 Project 都可以获得一个 Badge，截至现在，我已经有 78个 Badge。</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>操作题中的检测验证结果使用了 Tooling API，来验证 Org 中的变更。</p>
+<p>除了 Trailhead 外，文档依然是学习 Salesforce和提升技能的必要途径。</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
+<li><a href="https://developer.salesforce.com/blogs/tech-pubs/2015/05/trailhead-new-approach-learning-salesforce.html" target="_blank" rel="external">https://developer.salesforce.com/blogs/tech-pubs/2015/05/trailhead-new-approach-learning-salesforce.html</a></li>
+<li><a href="http://www.aboveandbeyondcloud.com/salesforce-trailhead/" target="_blank" rel="external">http://www.aboveandbeyondcloud.com/salesforce-trailhead/</a></li>
+<li><a href="http://www.exponentpartners.com/start-your-salesforce-admin-hike-trailhead/" target="_blank" rel="external">http://www.exponentpartners.com/start-your-salesforce-admin-hike-trailhead/</a></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Salesforce/" rel="tag">#Salesforce</a>
+          
+            <a href="/tags/Trailhead/" rel="tag">#Trailhead</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/02/15/salesforce1-platform-guide/" rel="next" title="Salesforce1 平台架构师指南">
+                <i class="fa fa-chevron-left"></i> Salesforce1 平台架构师指南
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/10/frontdoor/" rel="prev" title="使用 frontdoor.jsp 免登录访问 Salesforce 页面">
+                使用 frontdoor.jsp 免登录访问 Salesforce 页面 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/sfdcnotes-avatar.jpeg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Trailhead-的名称"><span class="nav-number">1.</span> <span class="nav-text">Trailhead 的名称</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Trail-Module-Project"><span class="nav-number">2.</span> <span class="nav-text">Trail, Module, Project</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Admin-Beginner"><span class="nav-number">2.1.</span> <span class="nav-text">Admin Beginner</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Admin-Intermediate"><span class="nav-number">2.2.</span> <span class="nav-text">Admin Intermediate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Admin-Advanced"><span class="nav-number">2.3.</span> <span class="nav-text">Admin Advanced</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Developer-Beginner"><span class="nav-number">2.4.</span> <span class="nav-text">Developer Beginner</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Developer-Intermediate"><span class="nav-number">2.5.</span> <span class="nav-text">Developer Intermediate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Develop-with-Mobile-SDK"><span class="nav-number">2.6.</span> <span class="nav-text">Develop with Mobile SDK</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Learn-CRM-Essentials"><span class="nav-number">2.7.</span> <span class="nav-text">Learn CRM Essentials</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cultivate-Equality-at-Work"><span class="nav-number">2.8.</span> <span class="nav-text">Cultivate Equality at Work</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Manage-Fundraising-for-Nonprofits"><span class="nav-number">2.9.</span> <span class="nav-text">Manage Fundraising for Nonprofits</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Explore-with-Wave-Analytics"><span class="nav-number">2.10.</span> <span class="nav-text">Explore with Wave Analytics</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Integrate-Microsoft-Email-and-Salesforce"><span class="nav-number">2.11.</span> <span class="nav-text">Integrate Microsoft Email and Salesforce</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Build-Apps-as-an-ISV-Partner"><span class="nav-number">2.12.</span> <span class="nav-text">Build Apps as an ISV Partner</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Manage-the-Salesforce-Way"><span class="nav-number">2.13.</span> <span class="nav-text">Manage the Salesforce Way</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Prepare-for-Salesforce-Releases"><span class="nav-number">2.14.</span> <span class="nav-text">Prepare for Salesforce Releases</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Navigate-the-Salesforce-Advantage"><span class="nav-number">2.15.</span> <span class="nav-text">Navigate the Salesforce Advantage</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Sell-Lightning-Fast-with-Salesforce"><span class="nav-number">2.16.</span> <span class="nav-text">Sell Lightning Fast with Salesforce</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Getting-Started-with-Lightning-Experience"><span class="nav-number">2.17.</span> <span class="nav-text">Getting Started with Lightning Experience</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Migrate-to-Lightning-Experience"><span class="nav-number">2.18.</span> <span class="nav-text">Migrate to Lightning Experience</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Develop-for-Lightning-Experience"><span class="nav-number">2.19.</span> <span class="nav-text">Develop for Lightning Experience</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Points-和-Badges"><span class="nav-number">3.</span> <span class="nav-text">Points 和 Badges</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">4.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
